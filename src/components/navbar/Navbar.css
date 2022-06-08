@@ -1,0 +1,9 @@
+.btn-navbar {
+  border: none;
+  background-color: white;
+  padding: 5px; 
+}
+.btn-navbar:hover {
+  color:white;
+  background-color: black;
+}

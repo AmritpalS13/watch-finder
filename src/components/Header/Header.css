@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+.hero {
+    font-family: 'Roboto', sans-serif;
+    color: #808080;
+    padding: 200px;
+    background-color: #cceeff;
+    align-items: center;
+    text-align: center;
+}
+.btn-field {
+   
+    font-weight: bolder;
+    font-size: 20px;
+    margin-right: 20px;
+}
+.btn-login{
+    padding:15px;
+    background-color: #cceeff;
+    margin-right: 20px;
+}
+.btn-view {
+    padding:15px;
+    background-color: #cceeff;
+    margin-right: 20px;
+}
+.btn-create-post {
+    padding:15px;
+    background-color: #cceeff;
+    margin-right: 20px;
+}
+.btn-login:hover {
+    background-color: black;
+    color: white;
+}
+.btn-view:hover {
+    background-color: black;
+    color: white;
+}
+.btn-create-post:hover {
+    background-color: black;
+    color: white;
+}
+
+
+h1 {
+    font-size: 72px;
+}
+h6 {
+    font-size: 24px;
+}
+
+.about {
+    font-family: 'Roboto', sans-serif;
+    padding-top: 50px;
+    padding-bottom: 200px;
+    color: #808080;
+    background-color: whitesmoke;
+    align-items: center;
+    text-align: center;
+}
