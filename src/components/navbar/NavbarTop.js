@@ -3,7 +3,7 @@ import {Container, Navbar, Nav, Button} from 'react-bootstrap';
 import { auth } from '../../firebase-config';
 import './Navbar.css';
 function NavbarTop({ auth, isAuth, signUserOut, isUserNull, setIsAuth }) {
-  console.log(auth);
+  
   var noUser = false;
   if(isUserNull === null) {
     noUser = true;

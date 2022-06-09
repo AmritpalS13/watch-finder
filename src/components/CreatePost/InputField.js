@@ -6,7 +6,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
 
-function InputField({ inputModel, inputName, inputRef, inputPrice, inputDesc }) {
+function InputField({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPost }) {
   return (
         <div className='input-field'>
             <TextField
@@ -46,7 +46,7 @@ function InputField({ inputModel, inputName, inputRef, inputPrice, inputDesc }) 
                 onChange={(e) => {inputDesc(e.target.value)}}
                 />
                 </div>
-                <Button variant='outlined'>Submit</Button>
+                <Button onClick={() => {createPost()}}variant='outlined'>Submit</Button>
         </div>    
   )
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Contaienr, { Container } from 'react-bootstrap';
 import InputField from './InputField';
-
+import { db, auth } from '../../firebase-config';
+import { collection, addDoc } from 'firebase/firestore';
 
 
 
@@ -17,6 +18,7 @@ function CreatePost() {
     //Description
     const [desc, setDesc] = useState("");
 
+    const postCollectionRef = collection(db, "posts");//reference specidic collection;
     const inputModel = (input) => {
       setModel(input);
     }
@@ -33,6 +35,20 @@ function CreatePost() {
       setDesc(input);
     }
 
+    const createPost = async () => {
+      await addDoc(postCollectionRef, {
+        model,
+        name,
+        ref,
+        price,
+        desc,
+        author: {
+          email: auth.currentUser.email,
+          name: auth.currentUser.displayName,
+          id: auth.currentUser.uid,
+        }
+      })
+    }
     return (
       <Container>
         <div className='create-post-header'>
@@ -45,6 +61,7 @@ function CreatePost() {
             inputRef={inputRef}
             inputPrice={inputPrice}
             inputDesc={inputDesc}
+            createPost={createPost}
           />
         </div>
       </Container>

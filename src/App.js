@@ -10,13 +10,15 @@ import Login from './components/Login/Login';
 import CreatePost from './components/CreatePost/CreatePost';
 import Test from './components/test/Test';
 
-import { auth } from './firebase-config';
+import { auth, db } from './firebase-config';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { collection, getDocs } from 'firebase/firestore';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+  const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
-
+  const postCollectionRef = collection(db, "posts");
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   })
@@ -32,12 +34,21 @@ function App() {
       window.location.pathname = 'login';
     })
   }
+
+  useEffect(() => {
+    const getPostData = async () => {
+      const data = await getDocs(postCollectionRef);
+      setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    }
+    getPostData();
+  })
+
   return (
     <Router>
       <h1>{user?.email}</h1>
       <NavbarTop auth={auth} setIsAuth={setIsAuth} isAuth={isAuth} isUserNull={isUserNull} signUserOut={signUserOut}/>
       <Routes>
-        <Route path="/" element={<Header />}/>
+        <Route path="/" element={<Header posts={posts}/>}/>
         <Route path="Login" element={<Login setIsAuth={setIsAuth} isUserNull={isUserNull}/>}/>
         <Route path="createpost" element={<CreatePost />} />
       </Routes>
