@@ -8,7 +8,7 @@ import NavbarTop from './components/navbar/NavbarTop';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import CreatePost from './components/CreatePost/CreatePost';
-import Test from './components/test/Test';
+
 
 import { auth, db } from './firebase-config';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
@@ -35,13 +35,14 @@ function App() {
     })
   }
 
-  useEffect(() => {
-    const getPostData = async () => {
-      const data = await getDocs(postCollectionRef);
-      setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
-    }
-    getPostData();
-  })
+  //Commented out because Firebase Quota writes.
+  // useEffect(() => {
+  //   const getPostData = async () => {
+  //     const data = await getDocs(postCollectionRef);
+  //     setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+  //   }
+  //   getPostData();
+  // }, []);
 
   return (
     <Router>

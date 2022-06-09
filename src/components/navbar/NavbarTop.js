@@ -4,6 +4,7 @@ import { auth } from '../../firebase-config';
 import './Navbar.css';
 function NavbarTop({ auth, isAuth, signUserOut, isUserNull, setIsAuth }) {
   
+  const logo = "<WFT />";
   var noUser = false;
   if(isUserNull === null) {
     noUser = true;
@@ -13,7 +14,7 @@ function NavbarTop({ auth, isAuth, signUserOut, isUserNull, setIsAuth }) {
   return (
   <Navbar>
   <Container>
-    <Navbar.Brand onClick={() => window.location.pathname="/"}>Watch Finder Toronto</Navbar.Brand>
+    <Navbar.Brand style={{color: 'blue'}}onClick={() => window.location.pathname="/"}>{logo} Watch Finder Toronto</Navbar.Brand>
     <button className='btn-navbar' onClick={signUserOut}>Logout</button>
     <button className='btn-navbar' onClick={() => {window.location.pathname="login"}}>Login</button>
     <button className='btn-navbar' onClick={() => {window.location.pathname="createpost"}}>Create Post</button>

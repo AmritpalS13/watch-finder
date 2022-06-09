@@ -4,7 +4,7 @@ import InputField from './InputField';
 import { db, auth } from '../../firebase-config';
 import { collection, addDoc } from 'firebase/firestore';
 
-
+import ImageTest from './ImageTest';
 
 function CreatePost() {
     //Watch Model/Brand
@@ -17,6 +17,9 @@ function CreatePost() {
     const [price, setPrice] = useState("");
     //Description
     const [desc, setDesc] = useState("");
+
+    //user uploades images of the watches.
+    const [images, setImages] = useState([]);
 
     const postCollectionRef = collection(db, "posts");//reference specidic collection;
     const inputModel = (input) => {
@@ -42,6 +45,7 @@ function CreatePost() {
         ref,
         price,
         desc,
+        images,//Image list.
         author: {
           email: auth.currentUser.email,
           name: auth.currentUser.displayName,
@@ -64,6 +68,7 @@ function CreatePost() {
             createPost={createPost}
           />
         </div>
+        <ImageTest />
       </Container>
     )
 }
