@@ -27,4 +27,4 @@ function ExistingUser( { login } ) {
   )
 }
 
-export default ExistingUser
+export default ExistingUser;

@@ -9,6 +9,7 @@ function ImageTest() {
 
 
     const [imageList, setImageList] = useState([]);
+    //Direct reference to the /images Firebase Storage directory
     const imageListRef = ref(storage, "images/");
 
     //User uploads the image.

@@ -3,40 +3,46 @@
     font-family: 'Roboto', sans-serif;
     color: #808080;
     padding: 200px;
-    background-color: #cceeff;
+    background-color: #f5f4ed;
     align-items: center;
     text-align: center;
 }
 .btn-field {
-   
+    padding-top: 32px;
     font-weight: bolder;
     font-size: 20px;
     margin-right: 20px;
 }
 .btn-login{
     padding:15px;
-    background-color: #cceeff;
+    background-color: #f5f4ed;
     margin-right: 20px;
 }
 .btn-view {
     padding:15px;
-    background-color: #cceeff;
+    background-color: #f5f4ed;
     margin-right: 20px;
 }
 .btn-create-post {
     padding:15px;
-    background-color: #cceeff;
+    background-color: #f5f4ed;
     margin-right: 20px;
 }
 .btn-login:hover {
+    transition: 1s;
+    font-size: 24px;
     background-color: black;
     color: white;
 }
 .btn-view:hover {
+    transition: 1s;
+    font-size: 24px;
     background-color: black;
     color: white;
 }
 .btn-create-post:hover {
+    transition: 1s;
+    font-size: 24px;
     background-color: black;
     color: white;
 }
@@ -44,9 +50,19 @@
 
 h1 {
     font-size: 72px;
+    font-weight: bold;
+}
+h1:hover {
+    transition: 0.5s;
+    color:black;
 }
 h6 {
     font-size: 24px;
+    font-weight: bold;
+}
+h6:hover {
+    transition: 0.5s;
+    color:black;
 }
 
 .about {

@@ -14,6 +14,7 @@ import { auth, db } from './firebase-config';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs } from 'firebase/firestore';
 
+
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const [posts, setPosts] = useState([]);
@@ -46,13 +47,14 @@ function App() {
 
   return (
     <Router>
-      <h1>{user?.email}</h1>
       <NavbarTop auth={auth} setIsAuth={setIsAuth} isAuth={isAuth} isUserNull={isUserNull} signUserOut={signUserOut}/>
+      
       <Routes>
         <Route path="/" element={<Header posts={posts}/>}/>
         <Route path="Login" element={<Login setIsAuth={setIsAuth} isUserNull={isUserNull}/>}/>
         <Route path="createpost" element={<CreatePost />} />
       </Routes>
+     
     </Router>
   );
 }

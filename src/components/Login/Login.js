@@ -9,6 +9,8 @@ import { signUpWithPopup, createUserEmailAndPassword, signInWithEmailAndPassword
 import CreateAccount from './CreateAccount';
 import ExistingUser from './ExistingUser';
 
+import './Login.css';
+
 function Login({ setIsAuth, isUserNull }) {
     console.log(isUserNull);
     let nav = useNavigate();
@@ -35,7 +37,8 @@ function Login({ setIsAuth, isUserNull }) {
         <Container>
             <div className='google-login' style={{paddingBottom:'50px'}}>
                 <h6>Sign in with Google below!</h6>
-                <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button>
+                {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
+                <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
             </div>
             <div className='existing-user-login'>
                 <ExistingUser login={login}/>

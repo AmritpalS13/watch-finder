@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import {Container, Navbar, Nav, Button} from 'react-bootstrap';
-import { auth } from '../../firebase-config';
+import {Container, Navbar } from 'react-bootstrap';
 import './Navbar.css';
-function NavbarTop({ auth, isAuth, signUserOut, isUserNull, setIsAuth }) {
+function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
   
+
   const logo = "<WFT />";
   var noUser = false;
   if(isUserNull === null) {
@@ -14,16 +14,21 @@ function NavbarTop({ auth, isAuth, signUserOut, isUserNull, setIsAuth }) {
   return (
   <Navbar>
   <Container>
-    <Navbar.Brand style={{color: 'blue'}}onClick={() => window.location.pathname="/"}>{logo} Watch Finder Toronto</Navbar.Brand>
-    <button className='btn-navbar' onClick={signUserOut}>Logout</button>
-    <button className='btn-navbar' onClick={() => {window.location.pathname="login"}}>Login</button>
-    <button className='btn-navbar' onClick={() => {window.location.pathname="createpost"}}>Create Post</button>
-    <button className='btn-navbar' >View Posts</button>
+    <button className='btn-navbar-home' onClick={() => window.location.pathname="/"}>Watch Finder Toronto</button>
+    {noUser ? ( <button className='btn-navbar' onClick={() => {window.location.pathname="login"}}>LOGIN</button>) : <></>}
+    
+
+    {noUser ? ( <button className='btn-navbar'>CREATE ACCOUNT</button>) : <></>}
+    
+    {!noUser ? (<button className='btn-navbar' onClick={() => {window.location.pathname="createpost"}}>CREATE POST</button>) : <></>}
+    <button className='btn-navbar' >VIEW POSTS</button>
     <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
-    <button className='btn-navbar' >My Account</button>
+    {!noUser ? (<button className='btn-navbar' onClick={signUserOut}>LOGOUT</button>) : <></>}
+    {!noUser ? (<button className='btn-navbar' style={{marginRight:'32px'}}>MY ACCOUNT</button>) : <></>}
+   
       <Navbar.Text>
-        Signed in as: <a>{!noUser ? (<p>{auth.currentUser.email}</p>) : <p>no user</p>}</a>
+        Signed in as: {!noUser ? (<p>{auth.currentUser.email}</p>) : <p>no user</p>}
       </Navbar.Text>
 
     </Navbar.Collapse>
