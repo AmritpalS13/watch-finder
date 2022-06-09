@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import Contaienr, { Container } from 'react-bootstrap';
+import InputField from './InputField';
 
-import { Button, Container, Form } from 'react-bootstrap';
 
-import './CreatePost.css';
+
 
 function CreatePost() {
     //Watch Model/Brand
@@ -16,51 +17,37 @@ function CreatePost() {
     //Description
     const [desc, setDesc] = useState("");
 
+    const inputModel = (input) => {
+      setModel(input);
+    }
+    const inputName = (input) => {
+      setName(input);
+    }
+    const inputRef = (input) => {
+      setRef(input);
+    }
+    const inputPrice = (input) => {
+      setPrice(input);
+    }
+    const inputDesc = (input) => {
+      setDesc(input);
+    }
 
     return (
-        <Container>
-<form>
-    <div>
-      <label for="name">Name</label>
-      <input id="name" type="text" />
-    </div>
-    <div>
-      <label for="email">Email</label>
-      <input id="email" type="email" />
-    </div>
-    <div>
-      <label for="comp">Favorite CSS Compiler</label>
-      <select id="comp">
-        <option value="sass">Sass</option>
-        <option value="less">Less</option>
-        <option value="stylus">Stylus</option>
-        <option value="postcss">PostCSS</option>
-        <option value="other">Other</option>
-      </select>
-    </div>
-    <div>
-      <fieldset>
-        <legend>Are you familiar with CSS Grid?</legend>
-        <input type="radio" name="grid" id="yes" value="yes" />
-        <label for="yes">Yes</label>
-        <input type="radio" name="grid" id="no" value="no" />
-        <label for="no">No</label>
-      </fieldset>
-    </div>
-    <div class="full-width">
-      <label for="message">Message</label>
-      <textarea id="message"></textarea>
-    </div>
-    <div class="full-width">
-      <input type="checkbox" id="newsletter" />
-      <label for="newsletter">Receive our newsletter?</label>
-    </div>
-    <div class="full-width">
-      <button type="submit">Send Response</button>
-      <button type="reset">Clear Form</button>
-    </div>
-  </form>
-        </Container>
+      <Container>
+        <div className='create-post-header'>
+          <h6>{model}</h6>
+        </div>
+        <div className='input-form'>
+          <InputField 
+            inputModel={inputModel}
+            inputName={inputName}
+            inputRef={inputRef}
+            inputPrice={inputPrice}
+            inputDesc={inputDesc}
+          />
+        </div>
+      </Container>
     )
 }
 

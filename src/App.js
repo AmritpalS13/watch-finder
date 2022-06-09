@@ -8,6 +8,8 @@ import NavbarTop from './components/navbar/NavbarTop';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import CreatePost from './components/CreatePost/CreatePost';
+import Test from './components/test/Test';
+
 import { auth } from './firebase-config';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 
