@@ -14,6 +14,7 @@ import { auth, db } from './firebase-config';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs } from 'firebase/firestore';
 
+import './App.css';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));

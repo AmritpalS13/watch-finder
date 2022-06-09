@@ -12,7 +12,7 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
     setIsAuth(true);
   }
   return (
-  <Navbar>
+  <Navbar className='nav'>
   <Container>
     <button className='btn-navbar-home' onClick={() => window.location.pathname="/"}>Watch Finder Toronto</button>
     {noUser ? ( <button className='btn-navbar' onClick={() => {window.location.pathname="login"}}>LOGIN</button>) : <></>}
@@ -26,7 +26,6 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
     <Navbar.Collapse className="justify-content-end">
     {!noUser ? (<button className='btn-navbar' onClick={signUserOut}>LOGOUT</button>) : <></>}
     {!noUser ? (<button className='btn-navbar' style={{marginRight:'32px'}}>MY ACCOUNT</button>) : <></>}
-   
       <Navbar.Text>
         Signed in as: {!noUser ? (<p>{auth.currentUser.email}</p>) : <p>no user</p>}
       </Navbar.Text>

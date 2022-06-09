@@ -34,7 +34,7 @@ function Login({ setIsAuth, isUserNull }) {
     }
 
     return (
-        <Container>
+        <div className="login-page">
             <div className='google-login' style={{paddingBottom:'50px'}}>
                 <h6>Sign in with Google below!</h6>
                 {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
@@ -43,19 +43,17 @@ function Login({ setIsAuth, isUserNull }) {
             <div className='existing-user-login'>
                 <ExistingUser login={login}/>
             </div>
-            <Accordion defaultActiveKey="0">
+            {/* <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="1">
                     <Accordion.Header>Not a user? Create an Account!</Accordion.Header>
                     <AccordionBody>
-                        {/**In this section we will create the create an account section
-                         * Including the form to create the account will be contained within here.
-                        */}
+
                         <CreateAccount setIsAuth={setIsAuth}/>
                     </AccordionBody>
                 </Accordion.Item>
-            </Accordion>
-
-        </Container>
+            </Accordion> */}
+        </div>
+      
     )
 }
 

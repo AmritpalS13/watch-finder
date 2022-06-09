@@ -1,5 +1,54 @@
-.google-login {
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    padding:100px;
+}
+.login-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 50px;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: white;
+}
+.login-container:hover {
+    transition: 0.3s ease-in;
+    border-color: black;
+}
+input {
     margin-top: 30px;
+    border: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding:12px;
+    border-radius: 3px;
+    width:250px;
+    
+}
+
+
+input:focus::placeholder {
+    color: transparent;
+    
+}
+input::placeholder {
+    color:#222;
+    transition: color 0.3s ease;
+}
+
+.google-login {
+    padding: 50px;
+    
+    margin-right: 25vh;
+    border: 2px solid;
+    background-color: white;
+    border-color: white;
+}
+.google-login:hover {
+    transition: 0.3s ease-in;
+    border-color: black;
 }
 .google-button {
     margin-top: 20px;
