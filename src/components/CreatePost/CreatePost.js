@@ -3,6 +3,8 @@ import Contaienr, { Container } from 'react-bootstrap';
 import InputField from './InputField';
 import { db, auth } from '../../firebase-config';
 import { collection, addDoc } from 'firebase/firestore';
+//Image array uuid
+import { v4 } from 'uuid';
 
 import ImageTest from './ImageTest';
 
@@ -25,7 +27,10 @@ function CreatePost() {
     //user uploades images of the watches.
     const [images, setImages] = useState([]);
 
+    const [imagesUid, setImagesUid] = useState("");
+
     const postCollectionRef = collection(db, "posts");//reference specidic collection;
+    
     const inputModel = (input) => {
       setModel(input);
     }
@@ -42,13 +47,19 @@ function CreatePost() {
       setDesc(input);
     }
 
+    const inputImagesUid = (input) => {
+      setImagesUid(input);
+    }
+
     const createPost = async () => {
+      
       await addDoc(postCollectionRef, {
         model,
         name,
         ref,
         price,
         desc,
+        imagesUid,
         images,//Image list.
         author: {
           email: auth.currentUser.email,
@@ -57,14 +68,18 @@ function CreatePost() {
         }
       })
     }
+    console.log(imagesUid);
     return (
       <div className='create-post-container'>
         <div  className='create-post-section'>
-          <Post inputModel={inputModel} inputName={inputName} inputRef={inputRef} inputPrice={inputPrice} inputDesc={inputDesc}/>
-        </div>
-        {/**The code below will contain the post card so the user can preview what the post will look like! */}
-        <div className='view-post-section'>
-          <DisplayCard model={model} name={name} price={price} />
+          <Post 
+            inputModel={inputModel} 
+            inputName={inputName} 
+            inputRef={inputRef} 
+            inputPrice={inputPrice} 
+            inputDesc={inputDesc}
+            inputImagesUid={inputImagesUid}
+          />
         </div>
       </div>
 
