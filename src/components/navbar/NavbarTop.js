@@ -25,7 +25,7 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
     <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
     {!noUser ? (<button className='btn-navbar' onClick={signUserOut}>LOGOUT</button>) : <></>}
-    {!noUser ? (<button className='btn-navbar' style={{marginRight:'32px'}}>MY ACCOUNT</button>) : <></>}
+    {!noUser ? (<button className='btn-navbar' style={{marginRight:'32px'}} onClick={() => {window.location.pathname="myaccount"}}>MY ACCOUNT</button>) : <></>}
       <Navbar.Text>
         Signed in as: {!noUser ? (<p>{auth.currentUser.email}</p>) : <p>no user</p>}
       </Navbar.Text>

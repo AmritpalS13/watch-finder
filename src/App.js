@@ -15,6 +15,7 @@ import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs } from 'firebase/firestore';
 
 import './App.css';
+import MyAccount from './components/MyAccount/MyAccount';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -54,6 +55,7 @@ function App() {
         <Route path="/" element={<Header posts={posts}/>}/>
         <Route path="Login" element={<Login setIsAuth={setIsAuth} isUserNull={isUserNull}/>}/>
         <Route path="createpost" element={<CreatePost />} />
+        <Route path="myaccount" element={<MyAccount />} />
       </Routes>
      
     </Router>

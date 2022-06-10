@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 .hero {
     font-family: 'Roboto', sans-serif;
-    color: #808080;
+    color: white;
     padding: 200px;
-    background-color: #f5f4ed;
+    background-color: #2f415d;
     align-items: center;
     text-align: center;
 }
@@ -14,6 +14,7 @@
     margin-right: 20px;
 }
 .btn-login{
+    
     padding:15px;
     background-color: #f5f4ed;
     margin-right: 20px;

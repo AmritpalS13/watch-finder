@@ -43,15 +43,6 @@ function Login({ setIsAuth, isUserNull }) {
             <div className='existing-user-login'>
                 <ExistingUser login={login}/>
             </div>
-            {/* <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Not a user? Create an Account!</Accordion.Header>
-                    <AccordionBody>
-
-                        <CreateAccount setIsAuth={setIsAuth}/>
-                    </AccordionBody>
-                </Accordion.Item>
-            </Accordion> */}
         </div>
       
     )

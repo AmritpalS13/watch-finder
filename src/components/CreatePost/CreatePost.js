@@ -6,6 +6,10 @@ import { collection, addDoc } from 'firebase/firestore';
 
 import ImageTest from './ImageTest';
 
+import './CreatePost.css';
+import Post from './Post';
+import DisplayCard from './DisplayCard';
+
 function CreatePost() {
     //Watch Model/Brand
     const [model, setModel] = useState("");//Very important for finding specific brands.
@@ -54,22 +58,16 @@ function CreatePost() {
       })
     }
     return (
-      <Container>
-        <div className='create-post-header'>
-          <h6>{model}</h6>
+      <div className='create-post-container'>
+        <div  className='create-post-section'>
+          <Post inputModel={inputModel} inputName={inputName} inputRef={inputRef} inputPrice={inputPrice} inputDesc={inputDesc}/>
         </div>
-        <div className='input-form'>
-          <InputField 
-            inputModel={inputModel}
-            inputName={inputName}
-            inputRef={inputRef}
-            inputPrice={inputPrice}
-            inputDesc={inputDesc}
-            createPost={createPost}
-          />
+        {/**The code below will contain the post card so the user can preview what the post will look like! */}
+        <div className='view-post-section'>
+          <DisplayCard model={model} name={name} price={price} />
         </div>
-        <ImageTest />
-      </Container>
+      </div>
+
     )
 }
 

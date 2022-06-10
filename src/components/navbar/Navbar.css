@@ -4,13 +4,16 @@
 .btn-navbar {
   border: none;
   background-color: white;
-  padding: 5px; 
+  padding: 5px;
+  margin-right: 30px; 
 }
 .btn-navbar:hover {
-  transition: 1s;
-  color:white;
+  transition: 0.5s;
+  /* color:white; */
   font-size: 23px;
-  background-color: black;
+  /* background-color: #2f415d; */
+  border-bottom: 5px solid;
+  border-color: #2f415d;
 }
 
 .btn-navbar-home {
@@ -20,6 +23,7 @@
   font-size: 24px;
 }
 .btn-navbar-home:hover {
-  transition: 1s;
-  color:blue;
+  transition: 0.5s ease-in;
+  color:#2f415d;
+  border-bottom: 5px solid;
 }

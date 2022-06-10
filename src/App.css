@@ -1,3 +1,7 @@
 body {
-    background-color: #f5f4ed;
+    background-color: white;
+}
+.nav {
+    border-bottom: 5px solid;
+    border-color:#2f415d;
 }
