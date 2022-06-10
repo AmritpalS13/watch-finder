@@ -18,7 +18,7 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
     {noUser ? ( <button className='btn-navbar' onClick={() => {window.location.pathname="login"}}>LOGIN</button>) : <></>}
     
 
-    {noUser ? ( <button className='btn-navbar'>CREATE ACCOUNT</button>) : <></>}
+    {noUser ? ( <button onClick={() => window.location.pathname="createaccount"}className='btn-navbar'>CREATE ACCOUNT</button>) : <></>}
     
     {!noUser ? (<button className='btn-navbar' onClick={() => {window.location.pathname="createpost"}}>CREATE POST</button>) : <></>}
     <button className='btn-navbar' >VIEW POSTS</button>

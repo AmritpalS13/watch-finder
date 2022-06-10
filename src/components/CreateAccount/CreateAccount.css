@@ -1,0 +1,33 @@
+.create-account-container {
+    display: flex;
+    justify-content: center;
+    padding: 150px;
+}
+.user-inputs-container {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    border: 5px solid;
+    border-bottom: 30px solid;
+    border-right: 18px solid;
+}
+
+.user-inputs-container:hover {
+    transition: 0.5s ease-in;
+    border-color: #2f415d;
+}
+
+.create-account-button {
+    padding:5px;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 5px;
+}
+.create-account-button:hover {
+    transition: 0.5s ease;
+    background-color: #2f415d;
+    color: white;
+}
+.create-account-header{
+    color:#2f415d;
+}
