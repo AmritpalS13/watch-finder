@@ -1,0 +1,15 @@
+.display-card:hover {
+    border-color: red;
+}
+.listing-btn {
+    background-color: white;
+    padding: 10px;
+    border: 2px solid #2f415d;
+}
+.listing-btn:hover {
+    transition: 0.5s ease;
+    color: white;
+    background-color: #2f415d;
+    border-bottom: 5px solid #2f415d;
+    border-right: 10px solid #2f415d;
+}
