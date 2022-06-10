@@ -3,7 +3,7 @@ import React from 'react'
 import PostImage from './PostImage'
 
 
-function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPost, inputImagesUid }) {
+function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPost, inputImagesUid, inputImages }) {
   
   
   return (
@@ -19,8 +19,8 @@ function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPo
         <input type="number" placeholder='$ Price'onChange={(e) => {inputPrice(e.target.value)}}/>
         <label>Price</label>
         {/**add image function */}
-        <PostImage inputImagesUid={inputImagesUid}/>
-        <button type="submit" className="btn-post">Submit</button>
+        <PostImage inputImagesUid={inputImagesUid} inputImages={inputImages}/>
+        <button onClick={() => {createPost()}}type="submit" className="btn-post">Submit</button>
       
     </div>
   )

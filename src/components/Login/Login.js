@@ -6,7 +6,7 @@ import AccordionBody from 'react-bootstrap/esm/AccordionBody';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../firebase-config';
 import { signUpWithPopup, createUserEmailAndPassword, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
-import CreateAccount from './CreateAccount';
+
 import ExistingUser from './ExistingUser';
 
 import './Login.css';
@@ -20,6 +20,9 @@ function Login({ setIsAuth, isUserNull }) {
             setIsAuth(true);
             nav("/");
         })
+    }
+    const createAccount = () => {
+
     }
     //Function gets called in <ExistingUser login={login}/>
     const login = async (email, password) => {

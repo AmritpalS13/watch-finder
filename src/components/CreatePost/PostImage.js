@@ -3,24 +3,26 @@ import { storage, auth } from '../../firebase-config';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
 import { v4 } from 'uuid';
 
-const PostImage = ({ inputImagesUid }) => {
-    const [imageUpload, setImageUpload] = useState(null);
+const PostImage = ({ inputImagesUid, inputImages }) => {
+    // const [imageUpload, setImageUpload] = useState(null);
     const [imagePath, setImagePath] = useState("");
 
     //All the images the user want's associated with the post.
     const [imageList, setImageList] = useState([]);
     
-    const images = [];
-    const uploadImage = () => {
-        if(imageUpload == null) {
-            return;
-        }
-        //const imageRef = ref(storage, `post-images/${}`)
-    }
-    console.log(imageUpload);
+    // const images = [];
+    // const uploadImage = () => {
+    //     if(imageUpload == null) {
+    //         return;
+    //     }
+    //     //const imageRef = ref(storage, `post-images/${}`)
+    // }
+    
+
     return (
         <div>
-            <input multiple type="file" name="image" onChange={(event) => {setImageUpload(event.target.files); inputImagesUid(v4())}}/>
+            {/**Now the images are going straight to the parent component, and uploads are handled there. */}
+            <input multiple type="file" name="image" onChange={(event) => {inputImages(event.target.files[0]); inputImagesUid(v4())}}/>
             <button type="submit">Submit Images</button>
         </div>
     )
