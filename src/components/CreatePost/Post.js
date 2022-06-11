@@ -9,7 +9,7 @@ function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPo
   return (
     <div className='post-container'>
       
-        <h6 style={{color:'#2f415d',borderBottom:'5px solid', borderColor:'#2f415d'}}>Create a Posting!</h6>
+        <h6 style={{color:'#790b0c',borderBottom:'5px solid', borderColor:'#790b0c'}}>Create a Posting!</h6>
         <input type="text" placeholder='Model' onChange={(e) => {inputModel(e.target.value)}}/>
         <label>Model </label>
         <input type="text" placeholder='Name'onChange={(e) => {inputName(e.target.value)}}/>

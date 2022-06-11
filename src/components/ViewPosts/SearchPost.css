@@ -1,0 +1,8 @@
+.search-input {
+    transition: width 0.5s 0.5s;
+}
+
+.search-input:focus {
+    width: 50rem;
+    
+}

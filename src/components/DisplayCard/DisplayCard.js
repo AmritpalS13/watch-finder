@@ -6,7 +6,7 @@ import DisplayData from './DisplayData';
 
 
 
-function DisplayCard() {
+function DisplayCard({ model, name, price }) {
     const images = [
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review.jpg",
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review-5-2048x1365.jpg.webp",
@@ -15,18 +15,7 @@ function DisplayCard() {
     ];
     return (
         <div style={{display:'flex',flexWrap:'wrap', justifyContent:'center'}}>
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
-            <DisplayData />
+            <DisplayData model={model} name={name} price={price}/>
         </div>
         
     )

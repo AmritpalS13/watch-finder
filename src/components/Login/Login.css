@@ -9,17 +9,17 @@
     flex-direction: column;
     background-color: white;
     padding: 50px;
-    border: 2px solid;
+    border: 4px solid;
     border-radius: 10px;
-    border-color: black;
+    border-color: #790b0c;
 
 }
 .login-container:hover {
     transition: 0.3s ease-in;
     border-right: 30px solid;
     border-top: 15px solid;
-    border-color: #2f415d;
-    color: #2f415d;
+    border-color: #790b0c;
+    color: #790b0c;
 }
 input {
     margin-top: 30px;
@@ -35,7 +35,10 @@ input {
 
 input:focus::placeholder {
     color: transparent;
-    
+}
+input:focus {
+    color: #790b0c;
+    outline-color: #790b0c;;
 }
 input::placeholder {
     color:#222;
@@ -45,16 +48,16 @@ input::placeholder {
 .google-login {
     padding: 50px;
     margin-right: 25vh;
-    border: 2px solid;
+    border: 4px solid;
     background-color: white;
-    border-color: black;
+    border-color: #790b0c;
 }
 .google-login:hover {
     transition: 0.3s ease-in;
     border-right: 30px solid;
     border-top: 15px solid;
-    border-color: #2f415d;
-    color: #2f415d;;
+    border-color: #790b0c;
+    color: #790b0c;
 }
 .google-button {
     margin-top: 20px;
@@ -65,7 +68,7 @@ input::placeholder {
 }
 .google-button:hover {
     transition: 0.3s;
-    background-color: #2f415d;
+    background-color: #790b0c;
     color:white;
     font-size: 18px;
 }

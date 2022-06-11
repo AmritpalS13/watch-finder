@@ -1,56 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Great+Vibes&family=Roboto:wght@100&family=Tangerine:wght@700&display=swap');
 .hero {
+    font-family: 'Cinzel', serif;
     font-family: 'Roboto', sans-serif;
     color: white;
     padding: 200px;
-    background-color: #2f415d;
+    background-color: #790b0c;
     align-items: center;
     text-align: center;
 }
 .btn-field {
     padding-top: 32px;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 30px;
     margin-right: 20px;
 }
 .btn-login{
-    
+    color: white;
     padding:15px;
-    background-color: #f5f4ed;
+    background-color: #790b0c;
     margin-right: 20px;
+    border: 3px solid;
+    transition: all 0.5s 0.5s ease;
 }
 .btn-view {
     padding:15px;
-    background-color: #f5f4ed;
+    color: white;
+    background-color: #790b0c;
     margin-right: 20px;
+    border: 3px solid;
+    transition: all 0.5s 0.5s ease;
 }
 .btn-create-post {
     padding:15px;
-    background-color: #f5f4ed;
+    color:white;
+    background-color: #790b0c;
     margin-right: 20px;
+    border: 3px solid;
+    transition: all 0.5s 0.5s ease;
 }
 .btn-login:hover {
-    transition: 1s;
-    font-size: 24px;
-    background-color: black;
-    color: white;
+    font-size: 35px;
+    background-color: white;
+    color: #790b0c;
 }
 .btn-view:hover {
-    transition: 1s;
-    font-size: 24px;
-    background-color: black;
-    color: white;
+    font-size: 35px;
+    background-color: white;
+    color: #790b0c;
 }
 .btn-create-post:hover {
-    transition: 1s;
-    font-size: 24px;
-    background-color: black;
-    color: white;
+    font-size: 35px;
+    background-color: white;
+    color: #790b0c;
 }
 
 
 h1 {
-    font-size: 72px;
+    font-family: 'Cinzel', serif;
+    font-family: 'Great Vibes', cursive;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Tangerine', cursive;
+    font-size: 133px;
     font-weight: bold;
 }
 h1:hover {

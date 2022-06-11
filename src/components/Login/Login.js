@@ -39,7 +39,7 @@ function Login({ setIsAuth, isUserNull }) {
     return (
         <div className="login-page">
             <div className='google-login' style={{paddingBottom:'50px'}}>
-                <h6>Sign in with Google below!</h6>
+                <h6 style={{borderBottom:"2px solid #790b0c"}}>Sign in with Google below!</h6>
                 {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
                 <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
             </div>

@@ -14,20 +14,21 @@
     padding-left: 100px;
     padding-right: 100px;
     margin-top: 30px;
-    border: 3px solid;
+    padding-bottom: 60px;
+    border: 5px solid #790b0c;
 
 }
 .post-container:hover {
     transition: 0.5s ease;
     border-right: 30px solid;
     border-top: 15px solid;
-    border-color: #2f415d;
+    border-color: #790b0c;
 }
 
 .card-container {
     display: flex;
     flex-direction: column;
-    color: #2f415d;
+    color: #790b0c;
     padding: 200px;
     padding-top: 50px;
     padding-left: 100px;
@@ -39,13 +40,13 @@
     border: 2px solid;
     border-right: 30px solid;
     border-top: 15px solid;
-    border-color: #2f415d;
+    border-color: #790b0c;
 }
 .card-container:hover {
     transition: 0.5s ease;
     border-right: 30px solid;
     border-top: 15px solid;
-    border-color: #2f415d;
+    border-color: #790b0c;
 }
 
 .btn-post {
@@ -56,7 +57,7 @@
 .btn-post:hover {
     transition: 0.5s ease;
     color:white;
-    background-color: #2f415d;
+    background-color: #790b0c;
     border-color: white;
 }
 .watch-images {

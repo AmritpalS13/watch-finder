@@ -1,10 +1,10 @@
 .display-card-container {
-    border: 2px solid;
     max-width: 600px;
-    max-height: 800px;
+    max-height: 600px;
     margin-top: 50px;
     margin-left: 50px;
     padding-bottom: 500px;
+    border: 2px solid #790b0c;
 }
 .display-card-images {
     display: flex;

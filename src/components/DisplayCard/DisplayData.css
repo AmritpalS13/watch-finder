@@ -4,12 +4,29 @@
 .listing-btn {
     background-color: white;
     padding: 10px;
-    border: 2px solid #2f415d;
+    border: 2px solid #790b0c;
+    transition: all 0.3s 0.3s ease;
 }
 .listing-btn:hover {
     transition: 0.5s ease;
     color: white;
-    background-color: #2f415d;
-    border-bottom: 5px solid #2f415d;
-    border-right: 10px solid #2f415d;
+    background-color: #790b0c;
+    border-bottom: 5px solid #790b0c;
+    border-right: 10px solid #790b0c;
+}
+
+
+
+.display-card-paragraph {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 2px solid #790b0c;
+    border-radius: 10px;
+    /* transition: background-color 0.5s 0.5s ease; */
+    transition: all 0.5s 0.5s ease;
+}
+.display-card-paragraph:hover {
+    color:white;
+    background-color: #790b0c;
 }

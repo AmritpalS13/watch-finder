@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 
 import DisplayCard from '../DisplayCard/DisplayCard';
+import SearchPosts from './SearchPosts';
 
 //We need to pull the data, from the database.
 function ViewPosts() {
@@ -15,6 +16,8 @@ function ViewPosts() {
     const [posts, setPosts] = useState([]);
     const postCollectionRef = collection(db, "posts");
 
+    const [search, setSearch] = useState("");
+
     const test = {
         model: 'Seiko',
         name: 'Tank',
@@ -22,7 +25,7 @@ function ViewPosts() {
     }
     
 
-    //The following is loading the page when it get's clicked.
+    // The following is loading the page when it get's clicked.
     // useEffect(() => {
     //     const getPostData = async () => {
     //         const data = await getDocs(postCollectionRef);
@@ -31,10 +34,20 @@ function ViewPosts() {
     //     }
     //     getPostData();
     // }, [])
-    
+    console.log(search);
     return (
-        <div>   
-            <DisplayCard model={test.model} name={test.name} price={test.price}/>
+        <div style={{display:'flex',flexWrap:'wrap', justifyContent:'center'}}>
+            <div className="search-section" style={{display:'flex', flexDirection:'row'}}>
+                <SearchPosts setSearch={setSearch}/>
+            </div>
+        {
+            posts.map( (post) => {
+                return (
+                    <DisplayCard model={post.model} name={post.name} price={post.price}/>
+                    
+                )
+            })
+        }
         </div>
     )
 }

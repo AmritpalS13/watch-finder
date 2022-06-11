@@ -9,7 +9,7 @@ function ExistingUser( { login } ) {
     const [password, setPassword] = useState("");
   return (
     <div className='login-container'>
-      <h6>Login below</h6>
+      <h6 style={{color:'#790b0c',borderBottom:'2px solid #790b0c'}}>Login below</h6>
       <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
       <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
       <button className='google-button' onClick={() => {login(email, password)}}>Login</button>
