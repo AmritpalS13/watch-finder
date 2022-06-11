@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Carousel, Card, Button } from 'react-bootstrap';
 import './DisplayCard.css';

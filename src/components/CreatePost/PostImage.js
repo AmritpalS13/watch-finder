@@ -22,7 +22,7 @@ const PostImage = ({ inputImagesUid, inputImages }) => {
     return (
         <div>
             {/**Now the images are going straight to the parent component, and uploads are handled there. */}
-            <input multiple type="file" name="image" onChange={(event) => {inputImages(event.target.files[0]); inputImagesUid(v4())}}/>
+            <input multiple type="file" name="image" onChange={(event) => {inputImagesUid(v4()); inputImages(event.target.files[0]);}}/>
             <button type="submit">Submit Images</button>
         </div>
     )

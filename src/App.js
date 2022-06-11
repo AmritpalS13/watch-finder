@@ -19,6 +19,7 @@ import MyAccount from './components/MyAccount/MyAccount';
 import CreateAccount from './components/CreateAccount/CreateAccount';
 
 import DisplayCard from './components/DisplayCard/DisplayCard';
+import ViewPosts from './components/ViewPosts/ViewPosts';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -60,6 +61,7 @@ function App() {
         <Route path="createaccount" element={<CreateAccount />} />
         <Route path="createpost" element={<CreatePost />} />
         <Route path="myaccount" element={<MyAccount />} />
+        <Route path="viewposts" element={<ViewPosts />} />
         <Route path="test" element={<DisplayCard />} />
       </Routes>
      

@@ -58,7 +58,7 @@ function CreatePost() {
       if(imageUpload == null) {
         return;
       }
-      const imageRef = ref(storage, `images/${uploadImage.name}`);
+      const imageRef = ref(storage, `images/${imagesUid}`);
       uploadBytes(imageRef, imageUpload).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
           setImages((prev) => [...prev, url]);
