@@ -1,8 +1,12 @@
-import React from 'react'
-import { CardGroup, Card, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { CardGroup, Card, ListGroup, ListGroupItem, Row, Col, Carousel, Alert } from 'react-bootstrap';
+import {ref, listAll, getDownloadURL} from 'firebase/storage';
+import { storage } from './firebase-config';
 import './TestCard.css';
 
 function TestCard() {
+    const [view, setView] = useState(false);
+    const [imageList, setImageList] = useState([]);
     const images = [
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review.jpg",
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review-5-2048x1365.jpg.webp",
@@ -13,9 +17,32 @@ function TestCard() {
     const name ="Mako 2";
     const price = "400";
     const authorEmail = "Amritpal@gmail.com";
+
+    //The the 07bd538a-9bf2-4ad3-ac1f-454c2031d592, is used as the identifier for the image folder.
+    //It is also unique for every post, and it contains the associated images.
+    const imagesListRef = ref(storage, "images/07bd538a-9bf2-4ad3-ac1f-454c2031d592/");// refernce to the folder.
+    useEffect(() => {
+      listAll(imagesListRef).then((response) => {
+        response.items.forEach((item) => {
+          getDownloadURL(item).then((url) => {
+            setImageList((prev) => [...prev, url]);
+            console.log(url);
+          })
+        })
+      })
+    }, [])
     return (
       <Card className="card-style" style={{ width: '18rem', marginLeft:'3rem'}}>
-      <Card.Img style={{maxHeight:'250px'}}variant="top" src={images[0]} />
+      {/* <Card.Img style={{maxHeight:'250px'}}variant="top" src={imageList[0]} /> */}
+      <Carousel>
+      {imageList.map((image) => {
+        return (
+          <Carousel.Item>
+            <Card.Img className="card-image" style={{maxHeight:'250px'}}variant="top" src={image} />
+            </Carousel.Item>
+        )
+      })}
+      </Carousel>
       <Card.Body>
       <Card.Title>{model}</Card.Title>
       <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>

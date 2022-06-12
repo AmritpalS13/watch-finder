@@ -9,6 +9,7 @@ import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import './CreatePost.css';
 import Post from './Post';
 
+import { v4 } from 'uuid';
 
 function CreatePost() {
     //Watch Model/Brand
@@ -52,20 +53,37 @@ function CreatePost() {
     const inputImagesUid = (input) => {
       setImagesUid(input);
     }
-    
-    //WIll have to mvoe the image upload to the database here.
+
     const uploadImage = () => {
       if(imageUpload == null) {
         return;
       }
-      const imageRef = ref(storage, `images/${imagesUid}`);
-      uploadBytes(imageRef, imageUpload).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setImages((prev) => [...prev, url]);
+      
+      //Map function was not working.
+      for(var i = 0; i < imageUpload.length; ++i) {
+        const imageRef = ref(storage, `images/${imagesUid}/${imageUpload[i].name + v4()}`);
+        uploadBytes(imageRef, imageUpload[i]).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            setImages((prev) => [...prev, url]);
+          })
         })
-      })
-
+      }
     }
+
+    //WIll have to mvoe the image upload to the database here.
+    // const uploadImage = () => {
+    //   if(imageUpload == null) {
+    //     return;
+    //   }
+    //   const imageRef = ref(storage, `images/${imagesUid}`);
+    //   uploadBytes(imageRef, imageUpload).then((snapshot) => {
+    //     getDownloadURL(snapshot.ref).then((url) => {
+    //       setImages((prev) => [...prev, url]);
+    //     })
+    //   })
+
+    // }
+    
     const createPost = async () => {
       //Will first upload the images to the database
       uploadImage();

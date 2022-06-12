@@ -47,7 +47,7 @@ function ViewPosts() {
         {
             posts.map( (post) => {
                 return (
-                    <DisplayCard model={post.model} name={post.name} price={post.price} desc={post.desc} authorEmail={post.author.email}/>
+                    <DisplayCard imagesUid={post.imagesUid} model={post.model} name={post.name} price={post.price} desc={post.desc} authorEmail={post.author.email}/>
                     
                 )
             })
