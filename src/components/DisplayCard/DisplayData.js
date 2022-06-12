@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Carousel, Card, Button } from 'react-bootstrap';
+import { Carousel, Card, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 import './DisplayCard.css';
 
 import './DisplayData.css';
 
-function DisplayData({ model, name, price }) {
+function DisplayData({ model, name, price, desc, authorEmail }) {
     const images = [
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review.jpg",
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review-5-2048x1365.jpg.webp",
@@ -14,30 +14,35 @@ function DisplayData({ model, name, price }) {
         "https://i.ytimg.com/vi/NRxujy6WpNE/maxresdefault.jpg"
     ];
     return (
-        <div>
-        <Card className="display-card" style={{ width: '30rem',border:'5px solid #790b0c', margin:'3rem', borderRadius:'10px'}}>
-            <Card.Body>
-                <Card.Title>{model}</Card.Title>
-                <p>{name}</p>
-                <p>{price}</p>
-                <Carousel fade>
-                    {images.map( (image) => {
-                    return (
-                    <Carousel.Item>
-                    <img style={{maxWidth:'500px', maxHeight:'500px', minWidth:'360px', minHeight:'360px'}} src={image} alt="watch" />
-                    </Carousel.Item>
-                    )
-                    })}                 
-                </Carousel>
-                <div className="display-card-paragraph">
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                </div>
-                <button className='listing-btn'>View Listing</button>
-            </Card.Body>
-        </Card>
+        <div>              
+                    <>
+                    <Row xs={1} md={2} className="g-4">
+                        
+                            <Col>
+                                <Card style={{ width: '18rem', marginLeft:'3rem'}}>
+                                    <Card.Img style={{maxHeight:'250px'}}variant="top" src={images[0]} />
+                                    <Card.Body>
+                                    <Card.Title>{model}</Card.Title>
+                                    <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
+                                    <Card.Text className='display-card-paragraph'>
+                                        {desc}
+                                    </Card.Text>
+                                    </Card.Body>
+                                    <ListGroup className="list-group-flush">
+                                    <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
+                                    <ListGroupItem className="list-card" >{model} {name}</ListGroupItem>
+                                    <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem>
+                                    </ListGroup>
+                                    <Card.Body>
+                                    <button className='listing-btn'>View Listing</button>
+                                    </Card.Body> 
+                                </Card>
+                            </Col>
+                        
+                    </Row>
+                    </>
+                
+           
         </div>
         
     )

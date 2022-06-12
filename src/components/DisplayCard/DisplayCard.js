@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-import { Carousel, Card, Button } from 'react-bootstrap';
+import { Carousel, Card, Button, CardGroup } from 'react-bootstrap';
 import './DisplayCard.css';
 import DisplayData from './DisplayData';
 
 
 
-function DisplayCard({ model, name, price }) {
+function DisplayCard({ model, name, price, desc, authorEmail }) {
     const images = [
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review.jpg",
         "https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review-5-2048x1365.jpg.webp",
@@ -15,7 +15,9 @@ function DisplayCard({ model, name, price }) {
     ];
     return (
         <div style={{display:'flex',flexWrap:'wrap', justifyContent:'center'}}>
-            <DisplayData model={model} name={name} price={price}/>
+            <CardGroup>
+            <DisplayData model={model} name={name} price={price} desc={desc} authorEmail={authorEmail}/>
+            </CardGroup>
         </div>
         
     )

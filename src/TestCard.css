@@ -1,0 +1,23 @@
+.card-style {
+    border: 2.5px solid #790b0c;
+    
+}
+.card-description {
+    
+    padding: 0.8rem;
+    transition: all 0.5s 0.5s ease-in;
+}
+.card-description:hover {
+    color: white;
+    background-color: #790b0c;
+    border: 2px solid;
+    border-radius: 25px;
+
+}
+.list-card {
+    transition: all 0.1s 0.1s ease-in;
+}
+.list-card:hover {
+    color: white;
+    background-color: #790b0c;
+}

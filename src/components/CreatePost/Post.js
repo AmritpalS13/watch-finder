@@ -2,7 +2,7 @@
 import React from 'react'
 import PostImage from './PostImage'
 
-
+import './CreatePost.css';
 function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPost, inputImagesUid, inputImages }) {
   
   
@@ -18,6 +18,9 @@ function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPo
         <label>Reference </label>
         <input type="number" placeholder='$ Price'onChange={(e) => {inputPrice(e.target.value)}}/>
         <label>Price</label>
+        <textarea className="description" type="text" placeholder='Description...' onChange={(e) => {inputDesc(e.target.value)}} />
+        <label>Description</label>
+       
         {/**add image function */}
         <PostImage inputImagesUid={inputImagesUid} inputImages={inputImages}/>
         <button onClick={() => {createPost()}}type="submit" className="btn-post">Submit</button>
