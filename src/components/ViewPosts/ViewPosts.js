@@ -19,12 +19,7 @@ function ViewPosts() {
 
     const [search, setSearch] = useState("");
 
-    const test = {
-        model: 'Seiko',
-        name: 'Tank',
-        price: 300,
-    }
-    
+ 
 
     // The following is loading the page when it get's clicked.
     useEffect(() => {

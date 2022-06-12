@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { CardGroup, Card, ListGroup, ListGroupItem, Row, Col, Carousel, Alert } from 'react-bootstrap';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
-import { storage } from './firebase-config';
+import { storage, auth, db } from './firebase-config';
 import './TestCard.css';
+
+import { collection, getDocs } from 'firebase/firestore';
 
 function TestCard() {
     const [view, setView] = useState(false);
@@ -26,11 +28,24 @@ function TestCard() {
         response.items.forEach((item) => {
           getDownloadURL(item).then((url) => {
             setImageList((prev) => [...prev, url]);
-            console.log(url);
+            
           })
         })
       })
     }, [])
+
+
+    //Testing posts collections.
+    const postCollectionRef = collection(db, "posts");
+    const getPostData = async () => {
+      const data = await getDocs(postCollectionRef);
+      data.docs.map( (doc) => {
+        if(doc.author.id === auth.currentUser.uid) {
+          console.log("hit");
+        }
+      })
+    }
+    getPostData();
     return (
       <Card className="card-style" style={{ width: '18rem', marginLeft:'3rem'}}>
       {/* <Card.Img style={{maxHeight:'250px'}}variant="top" src={imageList[0]} /> */}

@@ -1,0 +1,19 @@
+.my-account-btn{
+    color:black;
+    margin-top: 1rem;
+    padding: 1rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    margin-right: 6rem;
+    background-color:white;
+    border:none;
+    transition: all 0.3s 0.3s ease-in;
+}
+.my-account-btn:hover {
+    color: white;
+    background-color: #790b0c;
+    border-radius: 25px;
+}
+.my-account-navbar{
+    border-bottom: 2px solid;
+}
