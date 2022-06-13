@@ -19,9 +19,10 @@ function ViewPosts() {
     const [search, setSearch] = useState("");
 
     //Testing the likes method.
-    const[likes, setLikes] = useState([]);
-    const [testLikes, setTestLikes] = useState([]); 
-    const likedPostsCollection = collection(db, "liked-posts");
+    const [likes, setLikes] = useState([]);// the things the user liked.
+    //Should contain an array of objects -> (posts -> post)
+    const likesRef = collection(db, "liked-posts");
+
 
     const [currentUser, setCurrentUser] = useState(null);
     
@@ -33,6 +34,7 @@ function ViewPosts() {
             //Appending the data to the posts state
             setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
         }
+        //We should also read in the liked posts for the user!
         getPostData();
     }, [])
     const addLike = async (id) => {
@@ -41,16 +43,20 @@ function ViewPosts() {
         // await setDoc(doc(likedPostsCollection, auth.currentUser.uid),{
         //     likes: likes,
         // });
-        posts.map(async (post) => {
-            if(post.id == id) {
-                setLikes((prev) => [...prev, post]);
-                await setDoc(doc(likedPostsCollection, auth.currentUser.uid), {
-                    likes: likes
-                });
-                console.log(likes)
-            }
-        })
-        
+        if(likes.length !== 0) {
+            likes.map((like) => {
+                if(id == like) {
+                    console.log("item exists");
+                    return;
+                } else {
+                    console.log("Item does not exist.");
+                    setLikes((prev) => ([...prev, id]));
+                } 
+            }) 
+        } else {
+            setLikes(() => [id]);
+        }
+
     }
     return (
         <div>
