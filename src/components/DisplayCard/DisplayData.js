@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import { auth } from '../../firebase-config';
 import { Carousel, Card, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
 import { storage } from '../../firebase-config';//importing the storage for images.
@@ -7,7 +7,11 @@ import './DisplayCard.css';
 
 import './DisplayData.css';
 
-function DisplayData({ model, name, price, desc, authorEmail, imagesUid }) {
+function DisplayData({ postId, addLike, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
+    //The following will determine if the user is logged in (Null or not Null)
+    const [loggedIn, setLoggedIn] = useState(auth.currentUser);
+    var log = loggedIn;// true if logged in.
+    var del = false;
     //We need to find the associated images from the storage.
     const [imageList, setImageList] = useState([]);
     const imageListRef = ref(storage, `images/${imagesUid}/`);//Getting direct access to the images.
@@ -19,7 +23,13 @@ function DisplayData({ model, name, price, desc, authorEmail, imagesUid }) {
                 })
             })
         })
+        if(loggedIn !== null) {
+            log = true;
+        } 
     }, [])
+    if(deletePost !== undefined) {
+        del = true;
+    } 
     return (
         <div>              
                     <>
@@ -50,7 +60,9 @@ function DisplayData({ model, name, price, desc, authorEmail, imagesUid }) {
                                     </ListGroup>
                                     <Card.Body>
                                     <button className='listing-btn'>View Listing</button>
-                                    <button className="listing-btn">Save!</button>
+                                    {/* <button className="listing-btn" onClick={() => {addLike(postId)}}>Save!</button> */}
+                                    {log && (<button className="listing-btn" onClick={() => {addLike(postId)}}>Save!</button>)}
+                                    {del && (<button className="listing-btn" onClick={() => {deletePost(postId)}}>Delete</button>)}
                                     </Card.Body> 
                                 </Card>
                             </Col>

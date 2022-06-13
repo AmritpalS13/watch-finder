@@ -6,12 +6,12 @@ import DisplayData from './DisplayData';
 
 
 
-function DisplayCard({ model, name, price, desc, authorEmail, imagesUid }) {
+function DisplayCard({ addLike, postId, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
 
     return (
         <div style={{display:'flex',flexWrap:'wrap', justifyContent:'center'}}>
             <CardGroup>
-            <DisplayData imagesUid={imagesUid} model={model} name={name} price={price} desc={desc} authorEmail={authorEmail}/>
+            <DisplayData postId={postId} addLike={addLike} imagesUid={imagesUid} model={model} name={name} price={price} desc={desc} authorEmail={authorEmail} deletePost={deletePost}/>
             </CardGroup>
         </div>
         

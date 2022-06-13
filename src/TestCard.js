@@ -7,6 +7,7 @@ import './TestCard.css';
 import { collection, getDocs } from 'firebase/firestore';
 
 function TestCard() {
+    const [posts, setPosts] = useState([]);
     const [view, setView] = useState(false);
     const [imageList, setImageList] = useState([]);
     const images = [
@@ -37,15 +38,14 @@ function TestCard() {
 
     //Testing posts collections.
     const postCollectionRef = collection(db, "posts");
-    const getPostData = async () => {
-      const data = await getDocs(postCollectionRef);
-      data.docs.map( (doc) => {
-        if(doc.author.id === auth.currentUser.uid) {
-          console.log("hit");
-        }
-      })
-    }
-    getPostData();
+    useEffect(() => {
+      const getPostData = async () => {
+          const data = await getDocs(postCollectionRef);
+          //Appending the data to the posts state
+          setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      }
+      getPostData();
+  }, []);
     return (
       <Card className="card-style" style={{ width: '18rem', marginLeft:'3rem'}}>
       {/* <Card.Img style={{maxHeight:'250px'}}variant="top" src={imageList[0]} /> */}

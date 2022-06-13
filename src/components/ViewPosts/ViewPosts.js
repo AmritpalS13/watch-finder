@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CardGroup } from 'react-bootstrap';
 import { auth, db, storage } from '../../firebase-config';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 
 import DisplayCard from '../DisplayCard/DisplayCard';
@@ -12,14 +12,19 @@ import TestCard from '../../TestCard';
 function ViewPosts() {
 
     const imageListRef = ref(storage, "images/");
-    const image = ref(storage, 'images/636a258f-b0df-4664-aa5b-539129a988cb.png');
+    
     
     const [posts, setPosts] = useState([]);
     const postCollectionRef = collection(db, "posts");
-
     const [search, setSearch] = useState("");
 
- 
+    //Testing the likes method.
+    const[likes, setLikes] = useState([]);
+    const [testLikes, setTestLikes] = useState([]); 
+    const likedPostsCollection = collection(db, "liked-posts");
+
+    const [currentUser, setCurrentUser] = useState(null);
+    
 
     // The following is loading the page when it get's clicked.
     useEffect(() => {
@@ -30,7 +35,23 @@ function ViewPosts() {
         }
         getPostData();
     }, [])
-    console.log(search);
+    const addLike = async (id) => {
+        //This will append the posts that the user likes
+        // setLikes((prev) => [...prev, id]);
+        // await setDoc(doc(likedPostsCollection, auth.currentUser.uid),{
+        //     likes: likes,
+        // });
+        posts.map(async (post) => {
+            if(post.id == id) {
+                setLikes((prev) => [...prev, post]);
+                await setDoc(doc(likedPostsCollection, auth.currentUser.uid), {
+                    likes: likes
+                });
+                console.log(likes)
+            }
+        })
+        
+    }
     return (
         <div>
             <div className="search-section" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
@@ -41,9 +62,18 @@ function ViewPosts() {
                
         {
             posts.map( (post) => {
+                
                 return (
-                    <DisplayCard imagesUid={post.imagesUid} model={post.model} name={post.name} price={post.price} desc={post.desc} authorEmail={post.author.email}/>
-                    
+                    <DisplayCard
+                    postId={post.id}
+                    addLike={addLike} 
+                    imagesUid={post.imagesUid} 
+                    model={post.model} 
+                    name={post.name} 
+                    price={post.price} 
+                    desc={post.desc} 
+                    authorEmail={post.author.email}
+                    />
                 )
             })
         }

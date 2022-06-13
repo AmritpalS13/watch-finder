@@ -21,7 +21,7 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
     {noUser ? ( <button onClick={() => window.location.pathname="createaccount"}className='btn-navbar'>CREATE ACCOUNT</button>) : <></>}
     
     {!noUser ? (<button className='btn-navbar' onClick={() => {window.location.pathname="createpost"}}>CREATE POST</button>) : <></>}
-    <button className='btn-navbar' >VIEW POSTS</button>
+    <button className='btn-navbar' onClick={() => window.location.pathname="viewposts"}>VIEW POSTS</button>
     <Navbar.Toggle />
     <Navbar.Collapse className="justify-content-end">
     {!noUser ? (<button className='btn-navbar' onClick={signUserOut}>LOGOUT</button>) : <></>}

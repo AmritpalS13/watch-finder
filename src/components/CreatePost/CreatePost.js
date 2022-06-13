@@ -101,6 +101,7 @@ function CreatePost() {
           id: auth.currentUser.uid,
         }
       })
+      alert("Post Created!");
     }
     //The post will be isgned the imagesUid, to help with the storage location
 
