@@ -6,8 +6,9 @@ import { storage } from '../../firebase-config';//importing the storage for imag
 import './DisplayCard.css';
 
 import './DisplayData.css';
+import ViewPosts from '../ViewPosts/ViewPosts';
 
-function DisplayData({ postId, addLike, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
+function DisplayData({ postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //The following will determine if the user is logged in (Null or not Null)
     const [loggedIn, setLoggedIn] = useState(auth.currentUser);
     var log = loggedIn;// true if logged in.
@@ -59,9 +60,9 @@ function DisplayData({ postId, addLike, model, name, price, desc, authorEmail, i
                                     <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem>
                                     </ListGroup>
                                     <Card.Body>
-                                    <button className='listing-btn'>View Listing</button>
+                                    <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
                                     {/* <button className="listing-btn" onClick={() => {addLike(postId)}}>Save!</button> */}
-                                    {log && (<button className="listing-btn" onClick={() => {addLike(postId)}}>Save!</button>)}
+                                    {log && (<button className="listing-btn" onClick={() => {ViewPosts(postId)}}>Message!</button>)}
                                     {del && (<button className="listing-btn" onClick={() => {deletePost(postId)}}>Delete</button>)}
                                     </Card.Body> 
                                 </Card>

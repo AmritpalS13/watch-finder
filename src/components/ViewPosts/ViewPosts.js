@@ -7,6 +7,7 @@ import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import DisplayCard from '../DisplayCard/DisplayCard';
 import SearchPosts from './SearchPosts';
 import TestCard from '../../TestCard';
+import ViewListing from '../ViewListing/ViewListing';
 
 //We need to pull the data, from the database.
 function ViewPosts() {
@@ -37,26 +38,11 @@ function ViewPosts() {
         //We should also read in the liked posts for the user!
         getPostData();
     }, [])
-    const addLike = async (id) => {
-        //This will append the posts that the user likes
-        // setLikes((prev) => [...prev, id]);
-        // await setDoc(doc(likedPostsCollection, auth.currentUser.uid),{
-        //     likes: likes,
-        // });
-        if(likes.length !== 0) {
-            likes.map((like) => {
-                if(id == like) {
-                    console.log("item exists");
-                    return;
-                } else {
-                    console.log("Item does not exist.");
-                    setLikes((prev) => ([...prev, id]));
-                } 
-            }) 
-        } else {
-            setLikes(() => [id]);
-        }
 
+    const viewPost = (id) => {
+        //Change the route path, here.\
+        window.location.pathname = "viewlisting";
+        console.log("ID of the post: ", id);
     }
     return (
         <div>
@@ -72,7 +58,7 @@ function ViewPosts() {
                 return (
                     <DisplayCard
                     postId={post.id}
-                    addLike={addLike} 
+                    viewPost={viewPost}
                     imagesUid={post.imagesUid} 
                     model={post.model} 
                     name={post.name} 

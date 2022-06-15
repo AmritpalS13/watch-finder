@@ -12,7 +12,8 @@ function CreateAccount() {
     const signUp = async () => {
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password);
-            window.location.pathname = "/";
+            alert("Account created!");
+            window.location.pathname = "/viewposts";
         } catch(error) {
             alert(error.message);
         }

@@ -40,8 +40,9 @@ function MyPosts() {
     }
     return (
         <div>
-            <MyAccountNav />
             <h6>My Posts</h6>
+            
+            <div  style={{display:'flex', flexDirection:'row', justifyContent:"center"}}>
             {posts.map((post) => {
                 if(post.author.id == auth.currentUser.uid) {
                     return (
@@ -60,6 +61,7 @@ function MyPosts() {
                     )
                 }
             })}
+            </div>
         </div>
     )
 }

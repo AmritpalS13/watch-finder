@@ -6,6 +6,7 @@ import './Navbar/MyAccountNav.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import SavedPosts from './SavesPosts/SavedPosts';
 
+//WHen user goes on my account show theh user's posts.
 function MyAccount() {
   return (
     <div>
@@ -13,7 +14,7 @@ function MyAccount() {
         <p style={{color:'white',display:'flex',justifyContent:'start'}}>Account</p>
         <MyAccountNav />
       </div>
-      <SavedPosts />
+      <MyPosts />
       
     </div>
   )

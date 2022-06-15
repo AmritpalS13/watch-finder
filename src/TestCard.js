@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { CardGroup, Card, ListGroup, ListGroupItem, Row, Col, Carousel, Alert } from 'react-bootstrap';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
+
 import { storage, auth, db } from './firebase-config';
 import './TestCard.css';
 
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc } from 'firebase/firestore';
 
 function TestCard() {
     const [posts, setPosts] = useState([]);
@@ -36,6 +37,9 @@ function TestCard() {
     }, [])
 
 
+
+    
+   
     //Testing posts collections.
     const postCollectionRef = collection(db, "posts");
     useEffect(() => {
