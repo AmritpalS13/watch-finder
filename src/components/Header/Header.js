@@ -13,7 +13,6 @@ function Header() {
         <h1>Watch Finder Toronto</h1>
         <h6>Buy and sell used watches</h6>
         <div className='btn-field'>
-            <button onClick={() => {window.location.pathname="/login"}} className='btn-login'>Login</button>
             <button className='btn-view'>View</button>
             <button className='btn-create-post'>Create Posting</button>            
         </div>
