@@ -24,12 +24,17 @@ import TestCard from './TestCard';
 import MyPosts from './components/MyAccount/MyPosts/MyPosts';
 import SavedPosts from './components/MyAccount/SavesPosts/SavedPosts';
 import ViewListing from './components/ViewListing/ViewListing';
+import TestForum from './TestForum';
+import Info from './components/MyAccount/MyInformation/Info';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
+  const [currentPost, setCurrentPost] = useState("");
   const postCollectionRef = collection(db, "posts");
+  
+  var currentPostId;
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   })
@@ -45,6 +50,9 @@ function App() {
       window.location.pathname = 'login';
     })
   }
+  
+  
+  //Testing load to a specific POST,
 
   //Commented out because Firebase Quota writes.
   // useEffect(() => {
@@ -54,22 +62,48 @@ function App() {
   //   }
   //   getPostData();
   // }, []);
+  const viewPost = (id) => {
+    currentPostId = id;
+    console.log(currentPostId);
+    window.location.pathname="viewlisting";
+  }
+  useEffect(() => {
+    const getPostData = async () => {
+      const data = await getDocs(postCollectionRef);
+      //Appending the data to the posts state
+      setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+  }
+  //We should also read in the liked posts for the user!
+  getPostData();
+  }, [])
 
   return (
     <Router>
       <NavbarTop auth={auth} setIsAuth={setIsAuth} isAuth={isAuth} isUserNull={isUserNull} signUserOut={signUserOut}/>
-      
+      {/**
+       * We can load the posts here, this can be done so the user's can
+       * simply see the posts that already exists, regardles of being logged in.
+       * Also change the Project Logo.
+       */}
       <Routes>
         <Route path="/" element={<Header posts={posts}/>}/>
         <Route path="Login" element={<Login setIsAuth={setIsAuth} isUserNull={isUserNull}/>}/>
         <Route path="createaccount" element={<CreateAccount />} />
         <Route path="createpost" element={<CreatePost />} />
-        <Route path="myaccount" element={<MyAccount />} />
-        <Route path="viewposts" element={<ViewPosts />} />
+        <Route path="viewposts" element={<ViewPosts viewPost={viewPost}/>} />
+        <Route path="myaccount" element={<MyAccount auth={auth}/>} />
         <Route path="myaccount/myposts" element={<MyPosts />} />
-        <Route path="viewlisting" element={<ViewListing />} />
+        {/* <Route path="viewlisting" element={<ViewListing post={posts} id={currentPostId}/>} /> */}
+        {
+          posts.map((post) => {
+            return(
+              <Route path={post.id} element={<ViewListing post={post}/>} />
+            )
+          })
+        }
+      
         {/* <Route path="myaccount" element={<SavedPosts />} /> */}
-        <Route path="test" element={<TestCard/>} />
+        <Route path="test" element={<TestForum />} />
       </Routes>
      
     </Router>

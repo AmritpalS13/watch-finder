@@ -6,7 +6,7 @@ import DisplayData from './DisplayData';
 
 
 
-function DisplayCard({ viewPost, postId, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
+function DisplayCard({ viewPost, postId, model, name, price, desc, authorEmail, imagesUid, deletePost}) {
 
     return (
         <div style={{display:'flex',flexWrap:'wrap', justifyContent:'center'}}>

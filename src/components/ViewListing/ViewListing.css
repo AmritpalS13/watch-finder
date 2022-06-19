@@ -1,0 +1,16 @@
+.listing-descrip {
+    border: 2px solid #790b0c;
+    background-color:white;
+    transition: all 0.5s 0.5s ease;
+}
+.listing-descrip:hover {
+    background-color: #790b0c;
+    color:white;
+}
+.contact-me-btn {
+    border:solid 2px;
+    border-radius: 25px;
+    background-color: white;
+    padding:20px;
+    
+}

@@ -1,0 +1,7 @@
+.message-input {
+    transition: all 0.5s 0.5s ease;
+}
+
+.message-input:focus {
+    width: 50rem;
+}

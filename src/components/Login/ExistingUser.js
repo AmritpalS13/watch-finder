@@ -11,7 +11,7 @@ function ExistingUser( { login } ) {
     <div className='login-container'>
       <h6 style={{color:'#790b0c',borderBottom:'2px solid #790b0c'}}>Login below</h6>
       <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)}/>
-      <input type="text" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
+      <input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>
       <button className='google-button' onClick={() => {login(email, password)}}>Login</button>
     </div>
   )

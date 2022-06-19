@@ -36,8 +36,10 @@ function TestCard() {
       })
     }, [])
 
-
-
+    //Integrate a post forum.
+    /**
+     * forum -> city(collection) -> message
+     */
     
    
     //Testing posts collections.

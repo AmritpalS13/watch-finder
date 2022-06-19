@@ -38,3 +38,12 @@
     color: white;
     background-color: #790b0c;
 }
+
+.display-data-card {
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    transition: all 0.3s 0.3s ease;
+}
+.display-data-card:hover {
+    border: 5px solid #cccccc;
+}

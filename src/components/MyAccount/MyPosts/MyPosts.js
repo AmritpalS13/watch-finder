@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-
+import { ref, listAll, getDownloadURL, deleteObject } from 'firebase/storage';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { auth, db, storage } from '../../../firebase-config';
 import { connectStorageEmulator } from 'firebase/storage';
-
 import DisplayCard from '../../DisplayCard/DisplayCard';
 import MyAccountNav from '../Navbar/MyAccountNav';
+
+import { Container } from 'react-bootstrap';
+
+import './MyPosts.css';
 
 function MyPosts() {
     //We will load in posts here.
@@ -34,14 +37,22 @@ function MyPosts() {
         // addLikedPosts();   
     }, [])
     
-    const deletePost = async (id) => {
+    const deletePost = async (id, imagesUid) => {
+        //we should also delete the images associated with the post.
+        const imagesRef = ref(storage, `images/${imagesUid}/`);
+        deleteObject(imagesRef).then(() =>{
+            console.log("images deleted");
+        }).catch((error) => {
+            console.log(error);
+        })
         const documentDoc = doc(db, "posts", id);
         await deleteDoc(documentDoc);
+        alert("Post Deleted");
     }
     return (
         <div>
-            <h6>My Posts</h6>
-            
+            <Container>
+            <h6 className="my-posts-header" style={{display:'flex',justifyContent:'center'}}>My Posts</h6>
             <div  style={{display:'flex', flexDirection:'row', justifyContent:"center"}}>
             {posts.map((post) => {
                 if(post.author.id == auth.currentUser.uid) {
@@ -62,6 +73,7 @@ function MyPosts() {
                 }
             })}
             </div>
+            </Container>
         </div>
     )
 }

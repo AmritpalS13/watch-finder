@@ -1,0 +1,20 @@
+.dropdown {
+    color: black;
+    background-color: white;
+    border: none;
+    transition: all 0.2s 0.2s ease;
+}
+.dropdown:hover {
+    color: white;
+    background-color: #790b0c;
+}
+
+.dropdown-item {
+    background-color: white;
+    transition: all 0.2s 0.2s ease;
+}
+.dropdown-item:hover {
+    color: white;
+    background-color: #790b0c;
+}
+

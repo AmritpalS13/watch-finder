@@ -3,6 +3,7 @@ import { CardGroup } from 'react-bootstrap';
 import { auth, db, storage } from '../../firebase-config';
 import { collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import DisplayCard from '../DisplayCard/DisplayCard';
 import SearchPosts from './SearchPosts';
@@ -19,14 +20,19 @@ function ViewPosts() {
     const postCollectionRef = collection(db, "posts");
     const [search, setSearch] = useState("");
 
+    const [postId, setPostId] = useState("");
     //Testing the likes method.
     const [likes, setLikes] = useState([]);// the things the user liked.
     //Should contain an array of objects -> (posts -> post)
-    const likesRef = collection(db, "liked-posts");
+
 
 
     const [currentUser, setCurrentUser] = useState(null);
     
+    //When the user wants to view a specific post.
+    const viewPost = (id) => {
+        window.location.pathname= id;
+    }
 
     // The following is loading the page when it get's clicked.
     useEffect(() => {
@@ -38,12 +44,7 @@ function ViewPosts() {
         //We should also read in the liked posts for the user!
         getPostData();
     }, [])
-
-    const viewPost = (id) => {
-        //Change the route path, here.\
-        window.location.pathname = "viewlisting";
-        console.log("ID of the post: ", id);
-    }
+    
     return (
         <div>
             <div className="search-section" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
@@ -54,8 +55,8 @@ function ViewPosts() {
                
         {
             posts.map( (post) => {
-                
                 return (
+                    <>
                     <DisplayCard
                     postId={post.id}
                     viewPost={viewPost}
@@ -66,11 +67,15 @@ function ViewPosts() {
                     desc={post.desc} 
                     authorEmail={post.author.email}
                     />
+                    </>
                 )
             })
         }
             </CardGroup>
             </div>
+                <Routes>
+                    <Route path="/viewlisting" element={<ViewListing posts={posts} id={postId} />} />
+                </Routes>
         </div>
     )
 }
