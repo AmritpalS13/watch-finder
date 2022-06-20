@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { auth } from '../../firebase-config';
 import { Carousel, Card, Row, Col, ListGroup, ListGroupItem, Modal, Button, Form} from 'react-bootstrap';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
-import { storage } from '../../firebase-config';//importing the storage for images.
+import { storage, db } from '../../firebase-config';//importing the storage for images.
+import { v4 } from 'uuid';
 import './DisplayCard.css';
 
 import './DisplayData.css';
 import ViewPosts from '../ViewPosts/ViewPosts';
+import { addDoc, collection, getDocs, doc } from 'firebase/firestore';
 
-function DisplayData({ postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
+function DisplayData({ post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
     // const [show, setShow] = useState(false);
     const [show, setShow] = useState(false);
@@ -39,6 +41,7 @@ function DisplayData({ postId, viewPost, model, name, price, desc, authorEmail, 
     if(deletePost !== undefined) {
         del = true;
     } 
+    
     return (
         <div>              
                     <>
@@ -70,7 +73,8 @@ function DisplayData({ postId, viewPost, model, name, price, desc, authorEmail, 
                                     <Card.Body>
                                     <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
                                     {/* <button className="listing-btn" onClick={() => {addLike(postId)}}>Save!</button> */}
-                                    {log && (<button className="listing-btn" onClick={() => {<ShowMessageSystem />}}>Message!</button>)}
+                                    {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
+                                    {show && (<ShowMessageSystem post={post}/>)}
                                     {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
                                     </Card.Body> 
                                 </Card>
@@ -85,38 +89,103 @@ function DisplayData({ postId, viewPost, model, name, price, desc, authorEmail, 
     )
 }
 
-const ShowMessageSystem = () => {
+const ShowMessageSystem = ({post}) => {
     const [show, setShow] = useState(true);
 
+    const [message, setMessage] = useState("");
+    const [docID, setDocID] = useState("");// we will need this value
+    const [convos, setConvos] = useState(null);
+
+    const [users, setUsers] = useState([]);
+
+    const [user, setUser] = useState(null);
+    //Reciever will always be the author of the post.
+    //sender will always be determined by auth, that is the user that is logged in.
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
+
+
+    const usersRef = collection(db, "users");
+
+    //get the reference to the DB,
+    const messageRef = collection(db, "messaging-system");
+    var mess = [];
+    mess.push(message);
+    //The following will check if a conversation already exists.
+    const checkIfConvoAlreadyExists = () => {
+      
+
+      return false;
+    }
+    const sendMess = async () => {
+      
+      
+
+      //We want to push the message-system ID into the array.
+      
+     
+      console.log("inside user object : ", user);
+      //We will also need to check if a conversation between the sender and reciver already exists
+      if(checkIfConvoAlreadyExists()) {
+
+      }
+      var uniqueID = v4();
+      //This doc, will contain the information we need.
+      await addDoc(messageRef, {
+        convoExists: true,
+        messages: mess,
+        postId: post.id,
+        reciever: post.author.id,
+        sender: auth.currentUser.uid,
+        messageID: uniqueID,
+      });
+      //The messageID is how we will link the reciver and sender.
+      
+
+      
+    }
+
+    const submitMessage = () => {
+      sendMess();
+      
+      
+    }
+    useEffect(() => {
+      const getConvoData = async () => {
+        const data = await getDocs(messageRef);
+        setConvos(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      }
+      const getUsersData = async () => {
+        const data = await getDocs(usersRef);
+        data.docs.map((doc) => {
+          if(doc.id == post.author.id) {
+            setUser(doc.data());//This will be the reciver
+            //We want to append their messages array which is in "users".
+          }
+        })
+        
+      }
+      getUsersData();
+      getConvoData();
+      
+    }, []);
+    console.log(convos);
     return (
         <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{post.model} {post.name} - ${post.price}</Modal.Title>
+          
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
+          
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Label>Message</Form.Label>
+              <Form.Control as="textarea" onChange={(event) => setMessage(event.target.value)} rows={3} />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -124,9 +193,9 @@ const ShowMessageSystem = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
+          <button onClick={submitMessage}>
+            Submit
+          </button>
         </Modal.Footer>
       </Modal>
     </>

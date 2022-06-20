@@ -58,6 +58,7 @@ function ViewPosts() {
                 return (
                     <>
                     <DisplayCard
+                    post={post}
                     postId={post.id}
                     viewPost={viewPost}
                     imagesUid={post.imagesUid} 
