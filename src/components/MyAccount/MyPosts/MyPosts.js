@@ -53,7 +53,7 @@ function MyPosts() {
         <div>
             <Container>
             <h6 className="my-posts-header" style={{display:'flex',justifyContent:'center'}}>My Posts</h6>
-            <div  style={{display:'flex', flexDirection:'row', justifyContent:"center"}}>
+            <div>
             {posts.map((post) => {
                 if(post.author.id == auth.currentUser.uid) {
                     return (

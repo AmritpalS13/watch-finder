@@ -22,7 +22,7 @@ function Login({ setIsAuth, isUserNull }) {
             localStorage.setItem("isAuth", true);
             addUserToCollection();
             setIsAuth(true);
-            window.location.pathname = "myaccount"
+            window.location.pathname = "createpost"
         })
     }
     const createAccount = () => {
@@ -36,7 +36,7 @@ function Login({ setIsAuth, isUserNull }) {
             localStorage.setItem("isAuth", true);
             //Here we will append into the users collection if the user does not exist.
             addUserToCollection();//Check if we need to add the user, and add if we do.
-            window.location.pathname = "myaccount"
+            window.location.pathname = "createpost"
         } catch (error) {
             console.log(error.message);
             alert("Sorry! An error occured, please try again!");
@@ -89,10 +89,10 @@ function Login({ setIsAuth, isUserNull }) {
     }, [])
     console.log(users);
     return (
-        <Container>
+        <Container fluid className='bg-image'>
         <div className="login-page">
             <div className='google-login' style={{paddingBottom:'50px'}}>
-                <h6 style={{borderBottom:"2px solid #790b0c"}}>Sign in with Google below!</h6>
+                <h6 style={{borderBottom:"2px solid white", fontSize:'24px'}}>Sign in with Google below!</h6>
                 {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
                 <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
             </div>

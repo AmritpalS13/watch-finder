@@ -16,8 +16,8 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
   return (
   <Navbar className='nav'>
   <Container>
-    <button style={{border:'none', backgroundColor:'white'}} onClick={() => window.location.pathname="/"}>
-    <img style={{width:'25rem'}}src={image} />
+    <button className="btn-navbar"onClick={() => window.location.pathname="/"} style={{fontSize:'25px'}}>
+    Watch-Finder-Toronto
     </button>
     {/* <button className='btn-navbar-home' onClick={() => window.location.pathname="/"}>Watch Finder Toronto</button> */}
     {noUser ? ( <button className='btn-navbar' onClick={() => {window.location.pathname="login"}}>LOGIN</button>) : <></>}
@@ -33,7 +33,7 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
     {/* {!noUser ? (<button className='btn-navbar' style={{marginRight:'32px'}} onClick={() => {window.location.pathname="myaccount"}}>MY ACCOUNT</button>) : <></>} */}
      {!noUser ? (<MyAccountTest />) : <></>}
      <Navbar.Text>
-        Signed in as: {!noUser ? (<p style={{color:'#790b0c'}}>{auth.currentUser.email}</p>) : <p>no user</p>}
+        Signed in as: {!noUser ? (<p style={{color:'white'}}>{auth.currentUser.email}</p>) : <p>no user</p>}
       </Navbar.Text>
 
     </Navbar.Collapse>

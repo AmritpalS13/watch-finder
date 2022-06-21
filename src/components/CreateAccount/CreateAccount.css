@@ -1,23 +1,20 @@
 .create-account-container {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    background-image: url('./ca_bg.PNG');
     display: flex;
     justify-content: center;
     padding: 150px;
+    padding-bottom: 300px;
 }
 .user-inputs-container {
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     padding: 100px;
-    border: 5px solid #790b0c;
     border-radius: 20px;
 
 }
 
-.user-inputs-container:hover {
-    transition: 0.5s ease-in;
-    border-bottom: 30px solid;
-    border-right: 18px solid;
-    border-color: #790b0c;
-}
 
 .create-account-button {
     padding:5px;
@@ -31,5 +28,6 @@
     color: white;
 }
 .create-account-header{
-    color:#790b0c;
+    font-size: 24px;
+    color: white;
 }

@@ -22,8 +22,8 @@ function CreateAccount() {
         <div className="create-account-container">
             <div className='user-inputs-container'>
                 <h6 className='create-account-header'>Create an Account!</h6>
-                <input type="text" placeholder='Enter Email' onChange={(e) => {setEmail(e.target.value)}}/>
-                <input type="text" placeholder='Enter Password' onChange={(e) => {setPassword(e.target.value)}}/>
+                <input className="input-create"type="text" placeholder='Enter Email' onChange={(e) => {setEmail(e.target.value)}}/>
+                <input className="input-create"type="text" placeholder='Enter Password' onChange={(e) => {setPassword(e.target.value)}}/>
                 <button className="create-account-button" onClick={() => {signUp()}}>Create Account</button>
             </div>
         </div>

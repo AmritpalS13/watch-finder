@@ -26,6 +26,7 @@ import SavedPosts from './components/MyAccount/SavesPosts/SavedPosts';
 import ViewListing from './components/ViewListing/ViewListing';
 import TestForum from './TestForum';
 import Info from './components/MyAccount/MyInformation/Info';
+import Messages from './components/MyMessages/Messages';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -92,7 +93,8 @@ function App() {
         <Route path="createpost" element={<CreatePost />} />
         <Route path="viewposts" element={<ViewPosts viewPost={viewPost}/>} />
         <Route path="myaccount" element={<MyAccount auth={auth}/>} />
-        <Route path="myaccount/myposts" element={<MyPosts />} />
+        <Route path="myposts" element={<MyPosts />} />
+        <Route path="messages" element={<Messages />} />
         {/* <Route path="viewlisting" element={<ViewListing post={posts} id={currentPostId}/>} /> */}
         {
           posts.map((post) => {

@@ -11,15 +11,11 @@ function MyAccountTest() {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item className="dropdown-item" as="button" onClick={() => window.location.pathname="myaccount"}>My Posts
+    <Dropdown.Item className="dropdown-item" as="button" onClick={() => window.location.pathname="myposts"}>My Posts
         {/* <button onClick={() => window.location.pathname="/myaccount"}>My Posts</button> */}
     </Dropdown.Item>
-    <Dropdown.Item as="button">
-        
-    </Dropdown.Item>
-
-    <Dropdown.Item as="button">
-        Saved Posts
+    <Dropdown.Item as="button" onClick={() => window.location.pathname="messages"}>
+        Messages
     </Dropdown.Item>
     <Dropdown.Divider />
     <Dropdown.Item as="button" onClick={() => window.location.pathname="/accountinformation"}>

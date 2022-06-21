@@ -8,15 +8,14 @@ function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPo
   
   return (
     <div className='post-container'>
-      
-        <h6 style={{color:'#790b0c',borderBottom:'5px solid', borderColor:'#790b0c'}}>Create a Posting!</h6>
-        <input type="text" placeholder='Model' onChange={(e) => {inputModel(e.target.value)}}/>
+        <h6 style={{color:'white',fontSize:'24px'}}>Create a Posting!</h6>
+        <input className="input-create" type="text" placeholder='Model' onChange={(e) => {inputModel(e.target.value)}}/>
         <label>Model </label>
-        <input type="text" placeholder='Name'onChange={(e) => {inputName(e.target.value)}}/>
+        <input className="input-create" type="text" placeholder='Name'onChange={(e) => {inputName(e.target.value)}}/>
         <label>Name </label>
-        <input type="text" placeholder='Refence'onChange={(e) => {inputRef(e.target.value)}}/>
+        <input className="input-create" type="text" placeholder='Refence'onChange={(e) => {inputRef(e.target.value)}}/>
         <label>Reference </label>
-        <input type="number" placeholder='$ Price'onChange={(e) => {inputPrice(e.target.value)}}/>
+        <input className="input-create" type="number" placeholder='$ Price'onChange={(e) => {inputPrice(e.target.value)}}/>
         <label>Price</label>
         <textarea className="description" type="text" placeholder='Description...' onChange={(e) => {inputDesc(e.target.value)}} />
         <label>Description</label>

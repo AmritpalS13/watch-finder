@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase-config';
-import { Container, Row, Col, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Carousel, Card} from 'react-bootstrap';
 
 import { Grid, Item } from '@mui/material';
 import './ViewListing.css';
@@ -37,15 +37,17 @@ function ViewListing({post}) {
             </Col>
             <Col>
             <Container>
-                <div>
-                    <h6>{post.model} {post.name}</h6>
-                    <hr />
-                    <h6>{post.watchRef}</h6>
-                    <h6>$ {post.price}</h6>
-                    <hr />
-                    <h6>{post.desc}</h6>
-                    <hr />
-                </div>
+                    <Card className="text-center text-body">
+                    <Card.Header className="title" style={{color:'white'}}>{post.model} {post.name} {post.watchRef}</Card.Header>
+                    <Card.Body>
+                    <Card.Title className="price" style={{color:'white'}}>$ {post.price}</Card.Title>
+                    <Card.Text className="desc"style={{color:'white'}}>
+                        {post.desc}
+                    </Card.Text>
+                    <button>Just button</button>
+                    </Card.Body>
+                   
+                    </Card>
                 
             </Container>      
             </Col>

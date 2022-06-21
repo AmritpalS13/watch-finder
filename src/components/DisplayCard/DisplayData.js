@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../../firebase-config';
-import { Carousel, Card, Row, Col, ListGroup, ListGroupItem, Modal, Button, Form} from 'react-bootstrap';
+import { Carousel, Card, Row, Col, ListGroup, ListGroupItem, Modal, Button, Form, Container} from 'react-bootstrap';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
 import { storage, db } from '../../firebase-config';//importing the storage for images.
 import { v4 } from 'uuid';
@@ -8,7 +8,7 @@ import './DisplayCard.css';
 
 import './DisplayData.css';
 import ViewPosts from '../ViewPosts/ViewPosts';
-import { addDoc, collection, getDocs, doc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 
 function DisplayData({ post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
@@ -43,47 +43,84 @@ function DisplayData({ post, postId, viewPost, model, name, price, desc, authorE
     } 
     
     return (
-        <div>              
-                    <>
-                    <Row xs={1} md={2} className="g-4">
+      //   <div>              
+      //               <>
+      //               <Row xs={1} md={2} className="g-4">
                         
-                            <Col>
-                                <Card  className="display-data-card" style={{ width: '18rem',marginLeft:'3rem'}}>
-                                <Carousel>
-      {imageList.map((image) => {
+      //                       <Col>
+      //                           <Card  className="display-data-card" style={{ width: '18rem',marginLeft:'3rem'}}>
+      //                           <Carousel>
+      // {imageList.map((image) => {
+      //   return (
+      //     <Carousel.Item>
+      //       <Card.Img style={{maxHeight:'250px', minHeight:'250px'}}variant="top" src={image} />
+      //       </Carousel.Item>
+      //   )
+      // })}
+      // </Carousel>
+      //                               <Card.Body>
+      //                               <Card.Title>{model}</Card.Title>
+      //                               <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
+      //                               <Card.Text style={{height:'10rem'}}className='display-card-paragraph'>
+      //                                   {desc}
+      //                               </Card.Text>
+      //                               </Card.Body>
+      //                               <ListGroup style={{}}className="list-group-flush">
+      //                               <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
+      //                               <ListGroupItem className="list-card" >{model} {name}</ListGroupItem>
+      //                               {/* <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem> */}
+      //                               </ListGroup>
+      //                               <Card.Body>
+                                    // <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
+                                 
+                                    // {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
+                                    // {show && (<ShowMessageSystem post={post}/>)}
+                                    // {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
+      //                               </Card.Body> 
+      //                           </Card>
+      //                       </Col>
+                        
+      //               </Row>
+      //               </>
+                    
+      //   </div>
+      <Card className="new-card-container"style={{marginTop:'20px', padding:'20px'}}>
+      <Row>
+          <Col sm={3}>
+          <Carousel>
+          {imageList.map((image) => {
         return (
           <Carousel.Item>
-            <Card.Img style={{maxHeight:'250px', minHeight:'250px'}}variant="top" src={image} />
+            
+            <Card.Img className="card-image-style" variant="top" src={image} />
+            
             </Carousel.Item>
         )
       })}
       </Carousel>
-                                    <Card.Body>
-                                    <Card.Title>{model}</Card.Title>
-                                    <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
-                                    <Card.Text style={{height:'10rem'}}className='display-card-paragraph'>
-                                        {desc}
-                                    </Card.Text>
-                                    </Card.Body>
-                                    <ListGroup style={{height:'10rem'}}className="list-group-flush">
-                                    <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
-                                    <ListGroupItem className="list-card" >{model} {name}</ListGroupItem>
-                                    <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem>
-                                    </ListGroup>
-                                    <Card.Body>
-                                    <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
-                                    {/* <button className="listing-btn" onClick={() => {addLike(postId)}}>Save!</button> */}
-                                    {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
-                                    {show && (<ShowMessageSystem post={post}/>)}
-                                    {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
-                                    </Card.Body> 
-                                </Card>
-                            </Col>
-                        
-                    </Row>
-                    </>
-                    
-        </div>
+          </Col>
+          <Col>
+      <Card.Header style={{fontSize:'24px'}}>{model} {name}</Card.Header>
+      <Card.Header style={{fontSize:'18px'}}>$ {price}</Card.Header>
+      <Card.Body>
+      <blockquote className="blockquote mb-0">
+      <p>
+      {' '}
+        {desc}
+      {' '}
+      </p>
+      <footer >
+      <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
+       {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
+       {show && (<ShowMessageSystem post={post}/>)}
+      {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
+      
+      </footer>
+      </blockquote>
+      </Card.Body>
+      </Col>
+      </Row>
+      </Card>
         
         
     )
@@ -109,8 +146,7 @@ const ShowMessageSystem = ({post}) => {
 
     //get the reference to the DB,
     const messageRef = collection(db, "messaging-system");
-    var mess = [];
-    mess.push(message);
+
     //The following will check if a conversation already exists.
     const checkIfConvoAlreadyExists = () => {
       
@@ -133,15 +169,24 @@ const ShowMessageSystem = ({post}) => {
       //This doc, will contain the information we need.
       await addDoc(messageRef, {
         convoExists: true,
-        messages: mess,
+        messages: message,
         postId: post.id,
         reciever: post.author.id,
         sender: auth.currentUser.uid,
         messageID: uniqueID,
       });
       //The messageID is how we will link the reciver and sender.
-      
-
+      //Now we should append that messageID, or the UniqueID to the user.
+      var tempArray = user.messages;
+      tempArray.push(uniqueID);
+      //Now we want to update that field in the user's DOC,
+      const userRef = doc(db, "users", post.author.id);
+      const updateUserMessagesArray = async () => {
+        await updateDoc(userRef, {
+          messages: tempArray,
+        })
+      }
+      updateUserMessagesArray();
       
     }
 
@@ -174,9 +219,10 @@ const ShowMessageSystem = ({post}) => {
         <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{post.model} {post.name} - ${post.price}</Modal.Title>
+          <Modal.Title className="card-title">{post.model} {post.name} - ${post.price}</Modal.Title>
           
         </Modal.Header>
+        
         <Modal.Body>
           <Form>
           

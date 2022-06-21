@@ -1,39 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import { auth, db } from './firebase-config';
 
-import { Container, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 
 
 
 import './TestForum.css';
-/**
- * 1- User must be logged in to view and interact!
- * 2 - Catagorize based on city, (So far just Toronto)
- * 3 - Allow for input, and display the inputs.
- * 4 - Pull from the Firestore db
- * 
- */
+
 function TestForum() {
-    //The following is just test data.
-    const [temp, setTemp] = useState("");
-    const [message, setMessage] = useState([]);
-    
-    //The following method is also how we can implement a like system.
-    const send = () => {
-        var array = message; // set the array equal to the local state.
-        array.push(temp);
-        //write thev database.
-        setMessage(array);
-        setTemp("");//empty the input.
-    }
-    
+
     return (
         <Container>
-            <h6>Messaging system Test Page.</h6>
-            <input className="message-input" type="text" placeholder='send message...' onChange={(e) => setTemp(e.target.value)}></input>
-            <Button onClick={() => send()}>Send</Button>
+            <TestPost />
+            <TestPost />
         </Container>
     );
 }
 
+const TestPost = () => {
+    return (
+        <Card  className="card-container" style={{marginTop:'20px', padding:'20px'}}>
+        <Row>
+            <Col md="auto">
+            <img style={{height:'260px', width:'320px'}}src="https://twobrokewatchsnobs.com/wp-content/uploads/2020/05/Orient-Kamasu-Review.jpg" />
+            </Col>
+            <Col>
+        <Card.Header style={{fontSize:'24px'}}>Orient Mako 2</Card.Header>
+        <Card.Body>
+        <blockquote className="blockquote mb-0">
+        <p>
+        {' '}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+        erat a ante.{' '}
+        </p>
+        <footer className="blockquote-footer">
+        Someone famous in <cite title="Source Title">Source Title</cite>
+        </footer>
+        </blockquote>
+        </Card.Body>
+        </Col>
+        </Row>
+        </Card>
+    )
+}
 export default TestForum

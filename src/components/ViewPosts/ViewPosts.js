@@ -10,6 +10,7 @@ import SearchPosts from './SearchPosts';
 import TestCard from '../../TestCard';
 import ViewListing from '../ViewListing/ViewListing';
 
+import './ViewPosts.css';
 //We need to pull the data, from the database.
 function ViewPosts() {
 
@@ -46,7 +47,7 @@ function ViewPosts() {
     }, [])
     
     return (
-        <div>
+        <div className="viewlisting-bg">
             <div className="search-section" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
                 <SearchPosts setSearch={setSearch}/>
             </div>

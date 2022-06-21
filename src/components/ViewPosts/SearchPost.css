@@ -1,9 +1,18 @@
 .search-input {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    color: white;
     margin-bottom: 2rem;
+    border-bottom: 5px solid white;
+    background:none;
     transition: width 0.5s 0.5s;
 }
 
 .search-input:focus {
+    outline: none;
+    border-color: #790b0c;
     width: 50rem;
-    
+}
+
+.search-title {
+    font-family: 'Kdam Thmor Pro', sans-serif;
 }

@@ -100,26 +100,17 @@ const MyAccountData = ({ user }) => {
   
   return (
     <Container>
-      <Row>
-        <Col>
-          <div>
-          <h6>Profile picture</h6>
-          <img style={{border:'2px solid', borderRadius:'50px', width:'217px', height:'210px'}} src={user.profilePicture} />
-          </div>
-          <Row>
-            <button>Change Picture!</button>
-            <input type='file' name="image" onChange={(event) => setImageUpload(event.target.files[0]) } />
-          </Row>
-        </Col>
-        <Col>
-          <h6>username : {user.userName}</h6>
-          <button onClick={() => setNameReq(true)}>Update username</button>
-          {/* {updateName && (displayChangeUserName())} */}
-          {/* <input type="text" placeholder='new name.....' onChange={(event) => setNewUserName(event.target.value)} />
-          <button onClick={() => updateUserName()}>Submit</button> */}
-          {nameReq && (<InputUserNameForm show={true} changeName={changeName} setNewUserName={setNewUserName}/>)}
-        </Col>
-      </Row>
+      <div>
+        <button onClick={() => window.location.pathname="messages"}>View Messages</button>
+      <h6>Profile picture</h6>
+      <img style={{border:'2px solid', borderRadius:'50px', width:'217px', height:'210px'}} src={user.profilePicture} />
+      </div>
+        <button>Change Picture!</button>
+        <input type='file' name="image" onChange={(event) => setImageUpload(event.target.files[0]) } />
+      <h6>username : {user.userName}</h6>
+      <button onClick={() => setNameReq(true)}>Update username</button>
+
+      {nameReq && (<InputUserNameForm show={true} changeName={changeName} setNewUserName={setNewUserName}/>)}
     </Container>
   )
 }

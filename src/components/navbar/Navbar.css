@@ -1,35 +1,25 @@
 .nav {
-  background-color: white;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  background-color:black;
+  
+  transition: all 0.5s 0.5s ease-in;
+}
+.nav:hover {
+  border-bottom: 3px solid #790b0c;
 }
 
 .btn-navbar {
   border: none;
-  background-color: white;
+  color: white;
+  background-color: black;
   padding: 5px;
   margin-right: 30px; 
+  transition: all 0.3s 0.3s ease;
 }
 .btn-navbar:hover {
-  transition: 0.5s;
-  /* color:white; */
-  font-size: 23px;
-  /* background-color: #2f415d; */
-  border-bottom: 5px solid;
-  border-color: #790b0c;
+  border-bottom: 5px solid #790b0c;
+  font-size: 20px;
 }
 
-.btn-navbar-home {
-  font-family: 'Cinzel', serif;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Roboto', sans-serif;
-  font-family: 'Tangerine', cursive;
-  color:#790b0c;
-  padding-right: 30px;
-  border: none;
-  background: none;
-  font-size: 60px;
-}
-.btn-navbar-home:hover {
-  transition: 0.5s ease-in;
-  color:#790b0c;
-  border-bottom: 5px solid;
-}
+
+
