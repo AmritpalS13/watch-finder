@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { auth, db } from './firebase-config';
-
+import { auth, db  } from './firebase-config';
+import { collection, getDocs } from 'firebase/firestore';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 
@@ -8,6 +8,30 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import './TestForum.css';
 
 function TestForum() {
+
+    const colRef = collection(db, "test");
+    
+
+
+    //Here's how we can design the Chat system.
+    useEffect(() => {
+        const getData = async () => {
+            const data = await getDocs(colRef);
+            data.docs.map((doc) => {
+              
+            const testRef = collection(db, 'test', `${doc.id}`, 'messages');
+            const testSubCol = async () => {
+                const testData = await getDocs(testRef);
+                testData.docs.map((doc) => {
+                    console.log(doc.data());
+                })
+            }
+            testSubCol();
+          
+            })
+        }
+        getData();
+    }, []);
 
     return (
         <Container>
