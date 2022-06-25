@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../../firebase-config';
-import { Carousel, Card, Row, Col, ListGroup, ListGroupItem, Modal, Button, Form, Container} from 'react-bootstrap';
+import { Carousel, Card, Row, Col, ListGroup, ListGroupItem, Modal, Button, Form, Container, Accordion} from 'react-bootstrap';
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
 import { storage, db } from '../../firebase-config';//importing the storage for images.
 import { v4 } from 'uuid';
@@ -43,89 +43,65 @@ function DisplayData({ post, postId, viewPost, model, name, price, desc, authorE
     } 
     
     return (
-      //   <div>              
-      //               <>
-      //               <Row xs={1} md={2} className="g-4">
+        <div>              
+                    <>
+                    <Row xs={1} md={2} className="g-4">
                         
-      //                       <Col>
-      //                           <Card  className="display-data-card" style={{ width: '18rem',marginLeft:'3rem'}}>
-      //                           <Carousel>
-      // {imageList.map((image) => {
-      //   return (
-      //     <Carousel.Item>
-      //       <Card.Img style={{maxHeight:'250px', minHeight:'250px'}}variant="top" src={image} />
-      //       </Carousel.Item>
-      //   )
-      // })}
-      // </Carousel>
-      //                               <Card.Body>
-      //                               <Card.Title>{model}</Card.Title>
-      //                               <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
-      //                               <Card.Text style={{height:'10rem'}}className='display-card-paragraph'>
-      //                                   {desc}
-      //                               </Card.Text>
-      //                               </Card.Body>
-      //                               <ListGroup style={{}}className="list-group-flush">
-      //                               <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
-      //                               <ListGroupItem className="list-card" >{model} {name}</ListGroupItem>
-      //                               {/* <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem> */}
-      //                               </ListGroup>
-      //                               <Card.Body>
-                                    // <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
-                                 
-                                    // {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
-                                    // {show && (<ShowMessageSystem post={post}/>)}
-                                    // {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
-      //                               </Card.Body> 
-      //                           </Card>
-      //                       </Col>
-                        
-      //               </Row>
-      //               </>
-                    
-      //   </div>
-      <Card className="new-card-container"style={{marginTop:'20px', padding:'20px'}}>
-      <Row>
-          <Col sm={3}>
-          <Carousel>
-          {imageList.map((image) => {
+                            <Col>
+                                <Card  className="display-data-card" style={{ width: '18rem',marginLeft:'3rem'}}>
+                                <Carousel>
+      {imageList.map((image) => {
         return (
           <Carousel.Item>
-            
-            <Card.Img className="card-image-style" variant="top" src={image} />
-            
+            <Card.Img style={{maxHeight:'250px', minHeight:'250px'}}variant="top" src={image} />
             </Carousel.Item>
         )
       })}
       </Carousel>
-          </Col>
-          <Col>
-      <Card.Header style={{fontSize:'24px'}}>{model} {name}</Card.Header>
-      <Card.Header style={{fontSize:'18px'}}>$ {price}</Card.Header>
-      <Card.Body>
-      <blockquote className="blockquote mb-0">
-      <p>
-      {' '}
-        {desc}
-      {' '}
-      </p>
-      <footer >
-      <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
-       {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
-       {show && (<ShowMessageSystem post={post}/>)}
-      {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
-      
-      </footer>
-      </blockquote>
-      </Card.Body>
-      </Col>
-      </Row>
-      </Card>
-        
-        
+                                    <Card.Body>
+                                    <Card.Title>{model}</Card.Title>
+                                    <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
+                                    <Card.Text style={{height:'10rem'}}className='display-card-paragraph'>
+                                        {desc}
+                                    </Card.Text>
+                                    </Card.Body>
+                                    <ListGroup style={{}}className="list-group-flush">
+                                    <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
+                                    <ListGroupItem className="list-card" >{model} {name}</ListGroupItem>
+                                    {/* <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem> */}
+                                    </ListGroup>
+                                    <Card.Body>
+                                    <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
+                                 
+                                    {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
+                                    {show && (<ShowMessageSystem post={post}/>)}
+                                    {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
+                                    <Comments />
+                                    </Card.Body> 
+                                </Card>
+                            </Col>
+                        
+                    </Row>
+                    </>
+                    
+        </div>      
     )
 }
 
+const Comments = () => {
+  return (
+    <Accordion style={{marginTop:'20px'}}>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Comments</Accordion.Header>
+        <Accordion.Body>
+          <p style={{color:'black'}}>
+            Comments here.
+          </p>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+  )
+}
 const ShowMessageSystem = ({post}) => {
     const [show, setShow] = useState(true);
 
@@ -223,7 +199,7 @@ const ShowMessageSystem = ({post}) => {
           
         </Modal.Header>
         
-        <Modal.Body>
+        <Modal.Body >
           <Form>
           
             <Form.Group
@@ -236,10 +212,10 @@ const ShowMessageSystem = ({post}) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <button className='listing-btn' onClick={handleClose}>
             Close
-          </Button>
-          <button onClick={submitMessage}>
+          </button>
+          <button className="listing-btn" onClick={submitMessage}>
             Submit
           </button>
         </Modal.Footer>

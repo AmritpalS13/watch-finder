@@ -13,9 +13,11 @@ import ViewListing from '../ViewListing/ViewListing';
 import './ViewPosts.css';
 //We need to pull the data, from the database.
 function ViewPosts() {
+    //Here's where we load in the data.
 
     const imageListRef = ref(storage, "images/");
     
+    const [comments, setComments] = useState(null);
     
     const [posts, setPosts] = useState([]);
     const postCollectionRef = collection(db, "posts");
@@ -30,6 +32,8 @@ function ViewPosts() {
 
     const [currentUser, setCurrentUser] = useState(null);
     
+
+    const [testPost, setTestPost] = useState([])//Object, of a post containg the comments.
     //When the user wants to view a specific post.
     const viewPost = (id) => {
         window.location.pathname= id;
@@ -37,6 +41,21 @@ function ViewPosts() {
 
     // The following is loading the page when it get's clicked.
     useEffect(() => {
+        const testGetPostData = async () => {
+            const testPostData = await getDocs(postCollectionRef);
+            //Pull the comments collection,
+            testPostData.docs.map((doc) => {
+                const testCommentCol = collection(db, "posts", `${doc.id}`, 'comments');
+                const displayCommData = async () => {
+                    const comRef = await getDocs(testCommentCol);
+                    comRef.docs.map((data) => {
+                        console.log(data.data());
+                    })
+                }
+                displayCommData();
+            })
+
+        }
         const getPostData = async () => {
             const data = await getDocs(postCollectionRef);
             //Appending the data to the posts state
@@ -44,6 +63,9 @@ function ViewPosts() {
         }
         //We should also read in the liked posts for the user!
         getPostData();
+
+        //The following is testing how we will manage the new post methods.
+        testGetPostData();
     }, [])
     
     return (
