@@ -45,21 +45,22 @@ function ViewPosts() {
             const testPostData = await getDocs(postCollectionRef);
             //Pull the comments collection,
             testPostData.docs.map((doc) => {
-                const testCommentCol = collection(db, "posts", `${doc.id}`, 'comments');
-                const displayCommData = async () => {
-                    const comRef = await getDocs(testCommentCol);
-                    comRef.docs.map((data) => {
-                        console.log(data.data());
-                    })
+                
+                var temp = testPost;
+                var tempPost = {
+                    comments: collection(db, "posts", `${doc.id}`, 'comments'), // this will contain a refernce to the collection.
+                    post: doc.data(),//Object containg all the data for the post
                 }
-                displayCommData();
+                
+                temp.push(tempPost);
+                setTestPost(temp);
             })
 
         }
         const getPostData = async () => {
             const data = await getDocs(postCollectionRef);
             //Appending the data to the posts state
-            setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+            setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id, comments: collection(db, "posts", `${doc.id}`, "comments")})));
         }
         //We should also read in the liked posts for the user!
         getPostData();
@@ -78,6 +79,7 @@ function ViewPosts() {
                
         {
             posts.map( (post) => {
+               
                 return (
                     <>
                     <DisplayCard
@@ -90,6 +92,7 @@ function ViewPosts() {
                     price={post.price} 
                     desc={post.desc} 
                     authorEmail={post.author.email}
+                    comments={post.comments}
                     />
                     </>
                 )

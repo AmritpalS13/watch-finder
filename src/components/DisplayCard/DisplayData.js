@@ -10,7 +10,7 @@ import './DisplayData.css';
 import ViewPosts from '../ViewPosts/ViewPosts';
 import { addDoc, collection, getDocs, doc, updateDoc } from 'firebase/firestore';
 
-function DisplayData({ post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
+function DisplayData({ comments, post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
     // const [show, setShow] = useState(false);
     const [show, setShow] = useState(false);
@@ -26,7 +26,38 @@ function DisplayData({ post, postId, viewPost, model, name, price, desc, authorE
     const [imageList, setImageList] = useState([]);
     const imageListRef = ref(storage, `images/${imagesUid}/`);//Getting direct access to the images.
 
+    const [postComments, setComments] = useState([]);
+
+    const [newComment, setNewComment] = useState("");
+
+    const addNewComment = () => {
+      console.log("Comment to add : ", newComment);
+
+      const addComment = async () => {
+        await addDoc(comments, {
+          comment: newComment,
+        });
+      }
+      addComment();
+      console.log("Comment has been added!");
+    }
+
+    const setPostComments = (comment) => {
+      var temp = postComments;
+      temp.push(comment);
+      setComments(temp);
+
+    }
+
     useEffect(() => {
+        //We need to dig out the comments from the collection.
+        const getComments = async () => {
+          const commentsData = await getDocs(comments);
+          commentsData.docs.map((doc) => {
+            setPostComments(doc.data().comment);
+          })
+        }
+        getComments();
         listAll(imageListRef).then((response) => {
             response.items.forEach((item) => {
                 getDownloadURL(item).then((url) => {
@@ -76,7 +107,7 @@ function DisplayData({ post, postId, viewPost, model, name, price, desc, authorE
                                     {log && (<button className="listing-btn" onClick={() => {setShow(!show)}}>Message!</button>)}
                                     {show && (<ShowMessageSystem post={post}/>)}
                                     {del && (<button className="listing-btn" onClick={() => {deletePost(postId, imagesUid)}}>Delete</button>)}
-                                    <Comments />
+                                    <Comments postComments={postComments} setNewComment={setNewComment} addNewComment={addNewComment}/>
                                     </Card.Body> 
                                 </Card>
                             </Col>
@@ -88,15 +119,24 @@ function DisplayData({ post, postId, viewPost, model, name, price, desc, authorE
     )
 }
 
-const Comments = () => {
+const Comments = ({postComments, setNewComment, addNewComment}) => {
   return (
-    <Accordion style={{marginTop:'20px'}}>
-      <Accordion.Item eventKey="0">
+    <Accordion  style={{marginTop:'20px'}}>
+      <Accordion.Item className="main-comment-bar" eventKey="0">
         <Accordion.Header>Comments</Accordion.Header>
         <Accordion.Body>
-          <p style={{color:'black'}}>
-            Comments here.
-          </p>
+        <ListGroup style={{}}className="list-group-flush">
+          {postComments.map((comment) => {
+            return (
+              
+              
+              <ListGroupItem className="list-card item-comment" >{comment}</ListGroupItem>
+              
+            )
+          })}
+          </ListGroup>
+          <input className="comment-input" type="text" placeholder='comment...' onChange={(event) => setNewComment(event.target.value)}/>
+          <button onClick={() => addNewComment()}>Submit</button>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
@@ -129,6 +169,8 @@ const ShowMessageSystem = ({post}) => {
 
       return false;
     }
+    //We need to also update the comments collection here.
+    
     const sendMess = async () => {
       
       
