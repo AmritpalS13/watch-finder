@@ -4,20 +4,29 @@ import { Container } from 'react-bootstrap';
 import { db } from './firebase-config';
 function ChatSystem({ data }) {
     const messageRef = collection(db, 'message-test', `${data.id}`, 'connection');
-    
+    const [message, setMessage] = useState([]);
     useEffect(() => {
         
         const getMessages = async () => {
             const messageData = await getDocs(messageRef);
+            setMessage(messageData.docs.map((doc) => ({...doc.data(), id: doc.id})));
             messageData.docs.map((doc) => {
-                console.log(doc.data());
+               
+                
             })
         }
         getMessages();
     }, [])
+    console.log(message);
     return (
         <Container>
-            <h1>{data.id}</h1>
+            {
+                message.map((mes) => {
+                    return (
+                        <h1>{mes.comment}</h1>
+                    )
+                })
+            }
         </Container>
     )
 }

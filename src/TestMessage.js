@@ -30,6 +30,8 @@ function TestMessage() {
             const test = collection(db, 'message-test', `${data.id}`, 'connection');//"connection" is the sub-collection.
             const subCol = await addDoc(test, {
                 comment: message,
+                sender_id: user.userId,
+                reciver_id: user.userId,
             });
 
             
@@ -42,16 +44,19 @@ function TestMessage() {
             setUser(docData);   
         }
     }
-    const setMessageData = (data) => {
+    const setMessageData = (data, id) => {
         var temp = message_sys;
-        temp.push(data);
+        temp.push({
+            data: data,
+            id: id
+        });
         setMessage_sys(temp);
     }
     useEffect(() => {
         const getMessageData = async () => {
             const messageData = await getDocs(messageRef);
             messageData.docs.map((doc) => {
-                setMessageData(doc.data());//puts objects into an array.
+                setMessageData(doc.data(), doc.id);//puts objects into an array.
             })
         }
         const getUsersData = async () => {
@@ -64,18 +69,15 @@ function TestMessage() {
         getUsersData();
         getMessageData();
     }, []);
-    
+    console.log(message_sys)
     return (
         <Container>
             {
-                message_sys.map((messageSys) => {
-                    if(messageSys.reciver === auth.currentUser.uid) {
+                message_sys.map((message_s) => {
+                    console.log(message_s);
+                    if(message_s.data.reciver === auth.currentUser.uid) {
                         return (
-                            <p>Here</p>
-                        )
-                    } else {
-                        return (
-                            <p>No</p>
+                            <button onClick={() => window.location.pathname = message_s.id}>{message_s.id}</button>
                         )
                     }
                 })

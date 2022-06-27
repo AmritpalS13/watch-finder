@@ -79,12 +79,12 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                     <Row xs={1} md={2} className="g-4">
                         
                             <Col>
-                                <Card  className="display-data-card" style={{ width: '18rem',marginLeft:'3rem'}}>
+                                <Card  className="display-data-card" >
                                 <Carousel>
       {imageList.map((image) => {
         return (
           <Carousel.Item>
-            <Card.Img style={{maxHeight:'250px', minHeight:'250px'}}variant="top" src={image} />
+            <Card.Img className="display-card-image"variant="top" src={image} />
             </Carousel.Item>
         )
       })}
@@ -93,7 +93,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                                     <Card.Title>{model}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>$ {price}</Card.Title>
-                                    <Card.Text style={{height:'10rem'}}className='display-card-paragraph'>
+                                    <Card.Text className='display-card-paragraph'>
                                         {desc}
                                     </Card.Text>
                                     </Card.Body>

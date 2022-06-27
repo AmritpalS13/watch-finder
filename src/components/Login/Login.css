@@ -3,6 +3,20 @@
     background-image: url('./login_background.PNG');
     padding: 178px;
 }
+@media screen and (max-width: 450px) {
+    .login-page {
+        padding: 0px;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .google-login {
+        padding: 0px;
+        margin-right: 0px;
+    }
+    .google-login-title {
+        font-size: 9px;
+    }
+}
 .login-page {
     display: flex;
     justify-content: center;
@@ -43,6 +57,9 @@ input::placeholder {
     transition: color 0.3s ease;
 }
 
+.google-login-title {
+    font-size: 24px;
+}
 .google-login {
     color: white;
     padding: 50px;

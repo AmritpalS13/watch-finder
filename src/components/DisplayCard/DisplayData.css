@@ -53,9 +53,46 @@
     color: white;
     background: rgba(0, 0, 0, 0.7);
     /* border: 1px solid #cccccc; */
+    width: 18rem;
+    margin-left: 3rem;
     margin-top: 20px;
     border-radius: 20px;
     transition: all 0.3s 0.3s ease;
+}
+.display-card-image {
+    max-height: 250px;
+    min-height: 250px;
+    
+}
+@media screen and (max-width: 450px) {
+    .display-data-card {
+        width: 15rem;
+    }
+    .display-card-image {
+        max-height: 100px;
+    }
+    .card-image-style {
+        height: 100px;
+        width: 100px;
+    }
+    .display-card-paragraph {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0px;
+        font-size: 12px;
+        /* transition: background-color 0.5s 0.5s ease; */
+        transition: all 0.5s 0.5s ease;
+    }
+    .listing-btn {
+        color:white;
+        background-color: black;
+        padding: 5px;
+        border: 2px solid white;
+        border-radius: 25px;
+        margin-left: 10px;
+        margin-top: 10px;
+        transition: all 0.3s 0.3s ease;
+    }
 }
 .display-data-card:hover {
     background: rgba(0, 0, 0, 1.0);

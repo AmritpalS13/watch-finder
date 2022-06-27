@@ -92,7 +92,7 @@ function Login({ setIsAuth, isUserNull }) {
         <Container fluid className='bg-image'>
         <div className="login-page">
             <div className='google-login' style={{paddingBottom:'50px'}}>
-                <h6 style={{borderBottom:"2px solid white", fontSize:'24px'}}>Sign in with Google below!</h6>
+                <h6 className="google-login-title"style={{borderBottom:"2px solid white", }}>Sign in with Google below!</h6>
                 {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
                 <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
             </div>
