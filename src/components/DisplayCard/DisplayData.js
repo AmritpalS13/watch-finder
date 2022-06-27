@@ -92,15 +92,16 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                                     <Card.Body>
                                     <Card.Title>{model}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
+                                    <Card.Title style={{fontStyle:'italic'}}>$ {price}</Card.Title>
                                     <Card.Text style={{height:'10rem'}}className='display-card-paragraph'>
                                         {desc}
                                     </Card.Text>
                                     </Card.Body>
-                                    <ListGroup style={{}}className="list-group-flush">
+                                    {/* <ListGroup style={{}}className="list-group-flush">
                                     <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
-                                    <ListGroupItem className="list-card" >{model} {name}</ListGroupItem>
+                                    <ListGroupItem className="list-card" >{model} {name}</ListGroupItem> */}
                                     {/* <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem> */}
-                                    </ListGroup>
+                                    {/* </ListGroup> */}
                                     <Card.Body>
                                     <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
                                  
@@ -178,7 +179,7 @@ const ShowMessageSystem = ({post}) => {
       //We want to push the message-system ID into the array.
       
      
-      console.log("inside user object : ", user);
+      
       //We will also need to check if a conversation between the sender and reciver already exists
       if(checkIfConvoAlreadyExists()) {
 
@@ -232,7 +233,7 @@ const ShowMessageSystem = ({post}) => {
       getConvoData();
       
     }, []);
-    console.log(convos);
+    
     return (
         <>
       <Modal show={show} onHide={handleClose}>

@@ -12,6 +12,32 @@
     margin-right: 400px;
     transition: all 0.5s 0.5s ease;
 }
+.main-intro-text {
+    font-size: 48px;
+}
+.main-bg-intro-text-container {
+    padding: 300px;
+}
+@media screen and (max-width: 450px) {
+    .main-intro {
+        font-family: 'Kdam Thmor Pro', sans-serif;
+   
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding:20px;
+        margin-right: 0px;
+        transition: all 0.5s 0.5s ease;
+    }
+    .main-bg {
+        background-image: url();
+    }
+    .main-intro-text {
+        font-size: 14px;
+    }
+    .main-bg-intro-text-container {
+        padding: 100px;
+    }
+}
 .main-intro:hover {
     background-color: rgba(0, 0, 0, 0.7);
 }

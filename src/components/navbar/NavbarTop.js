@@ -16,7 +16,7 @@ function NavbarTop({ auth, signUserOut, isUserNull, setIsAuth }) {
   return (
   <Navbar className='nav'>
   <Container>
-    <button className="btn-navbar"onClick={() => window.location.pathname="/"} style={{fontSize:'25px'}}>
+    <button className="btn-navbar"onClick={() => window.location.pathname="/"}>
     Watch-Finder-Toronto
     </button>
     {/* <button className='btn-navbar-home' onClick={() => window.location.pathname="/"}>Watch Finder Toronto</button> */}

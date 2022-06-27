@@ -25,10 +25,10 @@ function Header() {
     // </div>
     <Container fluid>
       <Row className="main-bg">
-        <Col style={{padding:'300px'}}>
-          <div className='main-intro' style={{}}>
-            <p style={{fontSize:'48px'}}>Buying and selling used watches,</p>
-            <p style={{fontSize:'48px'}}>We make it fast and easy.</p>
+        <Col className="main-bg-intro-text-container">
+          <div className='main-intro'>
+            <p className="main-intro-text">Buying and selling used watches,</p>
+            <p className='main-intro-text'>We make it fast and easy.</p>
             <button className='join-btn' onClick={() => window.location.pathname="createaccount"}>Join Now!</button>
           </div>
         </Col>

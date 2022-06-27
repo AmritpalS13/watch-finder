@@ -7,7 +7,13 @@
 .nav:hover {
   border-bottom: 3px solid #790b0c;
 }
-
+@media screen and (max-width: 450px) {
+  .btn-navbar {
+    margin-right: 0px;
+    padding: 0px;
+    font-size: 10px;
+  }
+}
 .btn-navbar {
   border: none;
   color: white;

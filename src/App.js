@@ -27,10 +27,13 @@ import ViewListing from './components/ViewListing/ViewListing';
 import TestForum from './TestForum';
 import Info from './components/MyAccount/MyInformation/Info';
 import Messages from './components/MyMessages/Messages';
+import TestMessage from './TestMessage';
+import ChatSystem from './ChatSystem';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
   const [posts, setPosts] = useState([]);
+  const [messageData, setMessageData] = useState([]);
   const [user, setUser] = useState({});
   const [currentPost, setCurrentPost] = useState("");
   const postCollectionRef = collection(db, "posts");
@@ -69,11 +72,17 @@ function App() {
     window.location.pathname="viewlisting";
   }
   useEffect(() => {
+    const getMessageData = async () => {
+      const messageDataRef = collection(db, "message-test");
+      const messageData = await getDocs(messageDataRef);
+      setMessageData(messageData.docs.map((doc) => ({...doc.data(), id: doc.id})));
+    }
     const getPostData = async () => {
       const data = await getDocs(postCollectionRef);
       //Appending the data to the posts state
       setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
   }
+  getMessageData();
   //We should also read in the liked posts for the user!
   getPostData();
   }, [])
@@ -103,9 +112,16 @@ function App() {
             )
           })
         }
+        {
+          messageData.map((messageLink) => {
+            return (
+              <Route path={messageLink.id} element={<ChatSystem data={messageLink}/>} />
+            )
+          })
+        }
       
         {/* <Route path="myaccount" element={<SavedPosts />} /> */}
-        <Route path="test" element={<TestForum />} />
+        <Route path="test" element={<TestMessage />} />
       </Routes>
      
     </Router>
