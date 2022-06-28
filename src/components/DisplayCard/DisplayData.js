@@ -93,15 +93,10 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                                     <Card.Title>{model}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>$ {price}</Card.Title>
-                                    <Card.Text className='display-card-paragraph'>
-                                        {desc}
-                                    </Card.Text>
-                                    </Card.Body>
-                                    {/* <ListGroup style={{}}className="list-group-flush">
-                                    <ListGroupItem className="list-card" >$ {price}</ListGroupItem>
-                                    <ListGroupItem className="list-card" >{model} {name}</ListGroupItem> */}
-                                    {/* <ListGroupItem className="list-card" >Contact: {authorEmail}</ListGroupItem> */}
-                                    {/* </ListGroup> */}
+                                    {/**
+                                     * The description was removed
+                                     */}
+                                    </Card.Body>                                   
                                     <Card.Body>
                                     <button className='listing-btn' onClick={() => viewPost(postId)}>View Listing</button>
                                  

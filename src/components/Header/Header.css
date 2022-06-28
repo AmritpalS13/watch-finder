@@ -16,7 +16,15 @@
     font-size: 48px;
 }
 .main-bg-intro-text-container {
-    padding: 300px;
+    padding:200px;
+}
+.about-header {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 32px;
+}
+.about-para {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-size: 24px;
 }
 @media screen and (max-width: 450px) {
     .main-intro {
@@ -37,6 +45,15 @@
     .main-bg-intro-text-container {
         padding: 100px;
     }
+    .about-header {
+        
+        font-size: 18px;
+    }
+    .about-para {
+        
+        font-size: 10px;
+    }
+
 }
 .main-intro:hover {
     background-color: rgba(0, 0, 0, 0.7);
@@ -54,9 +71,9 @@
     
 }
 
-.main-bg {
+/* .main-bg {
     background-image: url("watchbackground.PNG");
-}
+} */
 .btn-field {
     padding-top: 32px;
     font-weight: bolder;
@@ -115,8 +132,139 @@
 .layout-card {
     padding:20px;
 }
-.about-header {
-    font-family: 'Kdam Thmor Pro', sans-serif;
-    font-size: 48px;
-}
 
+.video-about {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    
+    left: 0;
+}
+.video-wrapper {
+    padding: 0px;
+    height: 200px;
+    overflow: hidden;
+}
+.video-header {
+    position: absolute;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+}
+.main-video-wrapper {
+
+    margin-top: 0px;
+  
+    overflow: hidden;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.header {
+    border-radius: 25px;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 100px;
+    margin-top: 250px;
+    margin-right: 100px;
+    margin-left: 100px;
+    position: relative;
+    color: white;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+    transition: all 0.5s 0.5s ease-in;
+}
+.header:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.header-info {
+    font-size: 32px;
+}
+.header-title {
+    font-size: 58px;
+}
+.header-btn {
+    border: 2px solid white;
+    color: white;
+    background: none;
+    margin-top: 20px;
+    padding: 10px;
+}
+@media screen and (max-width: 450px) {
+    .header-info {
+        font-size: 18px;
+    }
+    .header-title {
+        font-size: 24px;
+    }
+    .header {
+        border-radius: 25px;
+        font-family: 'Kdam Thmor Pro', sans-serif;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 100px;
+        margin-top: 250px;
+        margin-right: 0px;
+        margin-left: 0px;
+        position: relative;
+        color: white;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+        transition: all 0.5s 0.5s ease-in;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .main-bg-intro-text-container {
+        padding:50px;
+    }
+    .header {
+        border-radius: 25px;
+        font-family: 'Kdam Thmor Pro', sans-serif;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 100px;
+        margin-top: 250px;
+        margin-right: 0px;
+        margin-left: 0px;
+        position: relative;
+        color: white;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+        transition: all 0.5s 0.5s ease-in;
+    }
+}
+@media screen and (max-width: 1500px) {
+    .main-bg-intro-text-container {
+        padding:150px;
+    }
+    .header {
+        border-radius: 25px;
+        font-family: 'Kdam Thmor Pro', sans-serif;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 100px;
+        margin-top: 250px;
+        margin-right: 0px;
+        margin-left: 0px;
+        position: relative;
+        color: white;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+        transition: all 0.5s 0.5s ease-in;
+    }
+}
+@media screen and (max-width: 800px) {
+    .main-bg-intro-text-container {
+        padding:50px;
+    }
+    .header {
+        border-radius: 25px;
+        font-family: 'Kdam Thmor Pro', sans-serif;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 100px;
+        margin-top: 250px;
+        margin-right: 0px;
+        margin-left: 0px;
+        position: relative;
+        color: white;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+        transition: all 0.5s 0.5s ease-in;
+    }
+}

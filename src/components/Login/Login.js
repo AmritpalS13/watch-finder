@@ -89,17 +89,36 @@ function Login({ setIsAuth, isUserNull }) {
     }, [])
     console.log(users);
     return (
-        <Container fluid className='bg-image'>
-        <div className="login-page">
-            <div className='google-login' style={{paddingBottom:'50px'}}>
-                <h6 className="google-login-title"style={{borderBottom:"2px solid white", }}>Sign in with Google below!</h6>
-                {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
-                <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
-            </div>
-            <div className='existing-user-login'>
-                <ExistingUser login={login}/>
-            </div>
-        </div>
+        // <Container fluid className='bg-image'>
+        // <div className="login-page">
+        //     <div className='google-login' style={{paddingBottom:'50px'}}>
+        //         <h6 className="google-login-title"style={{borderBottom:"2px solid white", }}>Sign in with Google below!</h6>
+        //         {/* <Button variant='outline-primary' onClick={signInWithGoogle}>Login in with Google</Button> */}
+        //         <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
+        //     </div>
+        //     <div className='existing-user-login'>
+        //         <ExistingUser login={login}/>
+        //     </div>
+        // </div>
+        // </Container>
+        <Container className='login-container'>
+            <Row>
+                <Col>
+                    <div className='google-login'>
+                        <h6 className='google-title'>Sign in with Google!</h6>
+                        <button className='google-button' onClick={signInWithGoogle}>Login in with Google</button>
+                    </div>
+                    <div className='existing-user-login'>
+                        <ExistingUser login={login} />
+                    </div>
+                </Col>
+                <Col xs={6}>
+                    <div className='bg-image'>
+                    <img src={require('./login_bg.PNG')} />
+
+                    </div>
+                </Col>
+            </Row>
         </Container>
       
     )
