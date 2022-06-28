@@ -53,10 +53,11 @@
     color: white;
     background: rgba(0, 0, 0, 0.7);
     /* border: 1px solid #cccccc; */
+    padding-top: 10px;
     width: 18rem;
     margin-left: 3rem;
     margin-top: 20px;
-    border-radius: 20px;
+    
     transition: all 0.3s 0.3s ease;
 }
 .display-card-image {

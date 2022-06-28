@@ -11,29 +11,32 @@ function CreateAccount() {
     const [password, setPassword] = useState("");
     const [userName, setUserName] = useState("");
 
-    const addUserToCollection = () => {
-        const addUser = async () => {
-            setDoc(doc(db, "users", auth.currentUser.uid), {
-                userId: auth.currentUser.uid,
-                email: auth.currentUser.email,
+    const addUserToCollection = (user) => {
+        const addUser = async (user) => {
+            console.log(user);
+            setDoc(doc(db, "users", user.user.uid), {
+                userId: user.user.uid, 
+                email: user.user.email,
                 name:"",
                 lastName:"",
                 userName: userName,
+                profilePicture: '/static/media/stockprofilepicture.40b94c438c2e0968be11.jpg',
                 bio:"",
                 friends: [],
                 likes: [],
                 messages:[],
             });
         };
-        addUser();
+        addUser(user);
     }
     const signUp = async () => {
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password);
-            alert("Account created!");
+            alert("Account created! ");
+            console.log("UID : ", user.user.uid);
             //User is logged in, so we want to add them to the collection.
-            addUserToCollection();
-            window.location.pathname = "/viewposts";
+            addUserToCollection(user);
+            //window.location.pathname = "/viewposts";
         } catch(error) {
             alert(error.message);
         }

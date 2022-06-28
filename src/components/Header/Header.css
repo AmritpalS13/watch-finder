@@ -192,6 +192,11 @@
     background: none;
     margin-top: 20px;
     padding: 10px;
+    transition: all 0.3s 0.3s ease-in;
+}
+.header-btn:hover {
+    background-color: white;
+    color: black;
 }
 @media screen and (max-width: 450px) {
     .header-info {

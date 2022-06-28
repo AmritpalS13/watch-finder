@@ -104,6 +104,7 @@ function App() {
         <Route path="myaccount" element={<MyAccount auth={auth}/>} />
         <Route path="myposts" element={<MyPosts />} />
         <Route path="messages" element={<Messages />} />
+        <Route path="accountinformation" element={<MyAccount auth={auth} />} />
         {/* <Route path="viewlisting" element={<ViewListing post={posts} id={currentPostId}/>} /> */}
         {
           posts.map((post) => {

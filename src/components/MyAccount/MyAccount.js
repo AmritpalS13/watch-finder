@@ -3,8 +3,8 @@ import MyPosts from './MyPosts/MyPosts';
 import MyAccountNav from './Navbar/MyAccountNav';
 import './Navbar/MyAccountNav.css';
 
-import { db } from '../../firebase-config';
-import { ref } from 'firebase/storage';
+import { db, storage, auth } from '../../firebase-config';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { collection, getDocs, setDoc, doc, updateDoc } from 'firebase/firestore';
 
 import SavedPosts from './SavesPosts/SavedPosts';
@@ -12,6 +12,9 @@ import Info from './MyInformation/Info';
 import { Container, Modal, Button, Row, Col } from 'react-bootstrap';
 import { setUserProperties } from 'firebase/analytics';
 
+
+import './MyAccount.css';
+import { v4 } from 'uuid';
 //WHen user goes on my account show theh user's posts.
 function MyAccount({ auth }) {
   //The following will load all the users that exist.
@@ -41,25 +44,27 @@ function MyAccount({ auth }) {
     })
   }
 
-  
+  console.log(users);
   return (
+    <Container style={{display:'flex',alignItems:'center', justifyContent:'center'}}>
     <div>
+
       {users.map((singleUser) => {
         if(singleUser.userId == auth.currentUser.uid) {
           return (
             //Will dump all the users data.
             <MyAccountData user={singleUser} />
-
           )
         }
       })}
 
     </div>
+    </Container>
   )
 }
 
 const MyAccountData = ({ user }) => {
-
+  
   const [nameReq, setNameReq] = useState(false);
 
   const [updateName, setUpdateName] = useState(false);
@@ -67,11 +72,32 @@ const MyAccountData = ({ user }) => {
 
   //user wants to update their profile picture.
   const [image, setImageUpload] = useState(null);
-  
+  const [imageProfile, setImageProfile] = useState(null);
 
 
   const userRef = doc(db, "users", user.userId);
   
+  const uploadImage = () => {
+    if(image === null) {
+      alert("No image found");
+      return;
+    }
+    const imageRef = ref(storage, `profile_pictures/${user.userId}/${image.name + v4()}`);
+    uploadBytes(imageRef, image).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        //setImageProfile(url);
+        const setNewPicture = async() => {
+          await updateDoc(userRef, {
+            profilePicture: url,
+          })
+          console.log("Picture set metadata: ", url);
+        }
+        setNewPicture();
+      })
+    });
+    
+  }
+
   const updateUserName = async() => {
     await updateDoc(userRef, {
       userName: newUserName
@@ -99,13 +125,14 @@ const MyAccountData = ({ user }) => {
   }, []);
   
   return (
+    //To change picture, we need to upload the file, and then retrieve the DOWNLOAD URL, and then set it in the user's collection DB.
     <Container>
       <div>
         <button onClick={() => window.location.pathname="messages"}>View Messages</button>
       <h6>Profile picture</h6>
       <img style={{border:'2px solid', borderRadius:'50px', width:'217px', height:'210px'}} src={user.profilePicture} />
       </div>
-        <button>Change Picture!</button>
+        <button onClick={() => uploadImage()}>Change Picture!</button>
         <input type='file' name="image" onChange={(event) => setImageUpload(event.target.files[0]) } />
       <h6>username : {user.userName}</h6>
       <button onClick={() => setNameReq(true)}>Update username</button>
@@ -115,6 +142,7 @@ const MyAccountData = ({ user }) => {
   )
 }
 
+//The code below is strictly for changing the username and is functioning.
 const InputUserNameForm = ({ changeName, setNewUserName }) => {
   const [show, setShow] = useState(true);
   const [username, setUsername] = useState();

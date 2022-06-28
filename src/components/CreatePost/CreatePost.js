@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { db, auth, storage } from '../../firebase-config';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 //Following will be used for the storage of the images.
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 
@@ -27,10 +27,10 @@ function CreatePost() {
     const [images, setImages] = useState([]);
     const [imageUpload, setImageUpload] = useState(null);
     const [imagesUid, setImagesUid] = useState("");
-
+    const [user, setUser] = useState(null);
     const postCollectionRef = collection(db, "posts");//reference specidic collection;
     const imageListRef = ref(storage, "images/");
-
+    const userListRef = collection(db, "users");//reference the users.
     const inputModel = (input) => {
       setModel(input);
     }
@@ -99,12 +99,26 @@ function CreatePost() {
           email: auth.currentUser.email,
           name: auth.currentUser.displayName,
           id: auth.currentUser.uid,
-        }
+        },
+        userData: user,
       })
       alert("Post Created!");
     }
     //The post will be isgned the imagesUid, to help with the storage location
-
+    useEffect(() => {
+      //Find the current user that's logged in.
+      const userData = async() => {
+        const data = await getDocs(userListRef);
+        data.docs.map((doc) => {
+          
+          if(doc.data().userId === auth.currentUser.uid) {
+            setUser(doc.data());
+          }
+        })
+      }
+      userData();
+    }, [])
+    console.log(user);
     return (
       <div className='create-post-container'>
         <div  className='create-post-section'>

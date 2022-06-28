@@ -14,7 +14,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
     // const [show, setShow] = useState(false);
     const [show, setShow] = useState(false);
-
+    const [user, setUser] = useState(null);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
@@ -32,13 +32,16 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
 
     const addNewComment = () => {
       console.log("Comment to add : ", newComment);
-
+      console.log("Comment being added by :", auth.currentUser.email);
       const addComment = async () => {
         await addDoc(comments, {
           comment: newComment,
+          author: user,
         });
       }
+      //Let's try and get some data about the person who is commenting;
       addComment();
+
       console.log("Comment has been added!");
     }
 
@@ -49,12 +52,24 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
 
     }
 
+    const userRef = collection(db, 'users');
     useEffect(() => {
+        //Finding the users,
+        const getUsers = async () => {
+          const userData = await getDocs(userRef);
+          userData.docs.map((doc) => {
+            
+            if(doc.data().userId === auth.currentUser.uid) {
+              setUser(doc.data());
+            }
+          })
+        }
+        getUsers();
         //We need to dig out the comments from the collection.
         const getComments = async () => {
           const commentsData = await getDocs(comments);
           commentsData.docs.map((doc) => {
-            setPostComments(doc.data().comment);
+            setPostComments(doc.data());
           })
         }
         getComments();
@@ -72,7 +87,6 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
     if(deletePost !== undefined) {
         del = true;
     } 
-    
     return (
         <div>              
                     <>
@@ -80,6 +94,10 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                         
                             <Col>
                                 <Card  className="display-data-card" >
+                                <Card.Title style={{fontStyle:'italic', fontSize:'12px', paddingLeft:'10px'}}>
+                                    <img src={post.userData.profilePicture} style={{width:'50px', height:'50px', borderRadius:'50px', marginRight:'10px'}}/>
+                                      {post.userData.userName}
+                                    </Card.Title>
                                 <Carousel>
       {imageList.map((image) => {
         return (
@@ -93,6 +111,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                                     <Card.Title>{model}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>$ {price}</Card.Title>
+                                    
                                     {/**
                                      * The description was removed
                                      */}
@@ -116,21 +135,34 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
 }
 
 const Comments = ({postComments, setNewComment, addNewComment}) => {
+  console.log(postComments);
   return (
     <Accordion  style={{marginTop:'20px'}}>
       <Accordion.Item className="main-comment-bar" eventKey="0">
         <Accordion.Header>Comments</Accordion.Header>
         <Accordion.Body>
-        <ListGroup style={{}}className="list-group-flush">
+        {/* <ListGroup style={{}}className="list-group-flush">
           {postComments.map((comment) => {
             return (
               
               
-              <ListGroupItem className="list-card item-comment" >{comment}</ListGroupItem>
+              <ListGroupItem className="list-card item-comment" ></ListGroupItem>
               
             )
           })}
-          </ListGroup>
+          </ListGroup> */}
+          <div>
+            {
+              postComments.map((comment) => {
+                return (
+                  <div style={{padding:'20px',border:'2px solid white'}}>
+                    <p><img  style={{width:'50px', height:'50px', borderRadius:'50px'}}src={comment.author.profilePicture} /> {comment.author.userName}</p>
+                    <h6>{comment.comment}</h6>
+                  </div>
+                )
+              })
+            }
+          </div>
           <input className="comment-input" type="text" placeholder='comment...' onChange={(event) => setNewComment(event.target.value)}/>
           <button onClick={() => addNewComment()}>Submit</button>
         </Accordion.Body>

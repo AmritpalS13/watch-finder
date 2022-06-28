@@ -33,7 +33,7 @@ function Header() {
             <Col><h1 className='header-title'>Watch Finder Toronto</h1></Col>
             <Col>
               <h4  className="header-info">We make buying and selling used watches fast and easy</h4> 
-              <button className='header-btn'>Create Account</button>
+              <button className='header-btn' onClick={() => window.location.pathname="/createaccount"}>Create Account</button>
             </Col>
           </Row>
         </div>
@@ -59,7 +59,7 @@ function Header() {
         <h1 className='about-header'>About us and how it works</h1>
         <Row className="layout-card">
           <Col>
-            <Card className="header-card"style={{width: '18rem'}}>
+            <Card className="header-card"style={{width: '23rem'}}>
               <Card.Body>
                 <Card.Title><h6 className='about-header'>View postings!</h6></Card.Title>
                 <hr style={{border:'2px solid white'}} />
@@ -71,11 +71,12 @@ function Header() {
                   and also there's no selling or buying tax!
                   </p>
                 </Card.Text>
+                <button className='header-btn' onClick={() => window.location.pathname="viewposts"}>Postings!</button>
               </Card.Body>
             </Card>
           </Col>
           <Col>
-          <Card className="header-card"style={{width: '18rem'}}>
+          <Card className="header-card"style={{width: '23rem'}}>
               <Card.Body>
                 <Card.Title><h6 className='about-header'>Create a Posting!</h6></Card.Title>
                 <hr style={{border:'2px solid white'}} />
@@ -87,11 +88,12 @@ function Header() {
                   closer to something you want.
                   </p>
                 </Card.Text>
+                <button className='header-btn' onClick={() => window.location.pathname="createaccount"}>Create Account!</button>
               </Card.Body>
             </Card>
           </Col>
           <Col>
-          <Card className="header-card"style={{width: '18rem'}}>
+          <Card className="header-card"style={{width: '23rem'}}>
               <Card.Body>
                 <Card.Title><h6 className='about-header'>About the Site</h6></Card.Title>
                 <hr style={{border:'2px solid white'}} />

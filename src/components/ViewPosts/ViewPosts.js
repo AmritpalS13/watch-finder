@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CardGroup } from 'react-bootstrap';
+import { CardGroup, Container, Row, Col, Accordion } from 'react-bootstrap';
 import { auth, db, storage } from '../../firebase-config';
 import { collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
@@ -70,6 +70,10 @@ function ViewPosts() {
     }, [])
     
     return (
+        
+        
+
+          
         <div className="viewlisting-bg">
             <div className="search-section" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
                 <SearchPosts setSearch={setSearch}/>
@@ -104,6 +108,7 @@ function ViewPosts() {
                     <Route path="/viewlisting" element={<ViewListing posts={posts} id={postId} />} />
                 </Routes>
         </div>
+       
     )
 }
 

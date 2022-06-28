@@ -59,6 +59,7 @@ function MyPosts() {
                     return (
                     <div>
                     <DisplayCard
+                    post={post}
                     postId={post.id}
                     imagesUid={post.imagesUid} 
                     model={post.model} 
