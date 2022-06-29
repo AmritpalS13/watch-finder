@@ -1,0 +1,64 @@
+.user-profile-container {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    color: white;
+    margin-top: 20px;
+    padding: 20px;
+    background-color:rgba(0, 0, 0, 0.8);
+}
+.poster-dash {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 1);
+    color: white;
+    border-radius: 25px;
+    transition: all 0.2s 0.2s ease-in-out;
+}
+.poster-dash:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.dash-comment-poster {
+    font-size: 24px;
+}
+.dash-comment {
+    font-size: 19px;
+}
+.poster-image {
+    width: 100px;
+    height: 100px;
+}
+.goto-btn {
+    margin-right: 10px;
+    margin-top: 10px;
+    border: 2px solid white;
+    color: white;
+    background: none;
+    transition: all 0.2s 0.2s ease-in-out;
+}
+.goto-btn:hover {
+    background: #790b0c;
+}
+
+.dash-input::placeholder {
+    color: black;
+}
+.dash-input:focus {
+    color: black;
+    width: 500px;
+}
+.dash-input {
+    border-bottom: 2px solid black;
+    width: 300px;
+    margin-bottom: 5px;
+    outline: none;
+    margin-top: 20px;
+    transition: all 0.3s 0.3s ease-in-out;
+}
+.input-btn {
+    background: none;
+    transition: all 0.2s 0.2s ease-in-out;
+}
+.input-btn:hover {
+    color: white;
+    background:black;
+}

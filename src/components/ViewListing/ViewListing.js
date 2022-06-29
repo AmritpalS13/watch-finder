@@ -66,9 +66,9 @@ function ViewListing({post}) {
     }, [refresh]);
     
     return (
-        <Container fluid>
+        <Container >
             <Row>
-            <Col>
+            <Col className='image-container'>
                 <Carousel fade>
                 {
                     imageList.map((image) => {
@@ -82,7 +82,7 @@ function ViewListing({post}) {
                 </Carousel>
             </Col>
             <Col>
-            <Container>
+            <Container className="information-container">
                     
                     <Card className="text-center text-body">
                     <div className='listing-profile-container'>

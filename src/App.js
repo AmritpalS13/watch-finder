@@ -29,6 +29,7 @@ import Info from './components/MyAccount/MyInformation/Info';
 import Messages from './components/MyMessages/Messages';
 import TestMessage from './TestMessage';
 import ChatSystem from './ChatSystem';
+import UserProfile from './components/UserProfiles/UserProfile';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -36,7 +37,9 @@ function App() {
   const [messageData, setMessageData] = useState([]);
   const [user, setUser] = useState({});
   const [currentPost, setCurrentPost] = useState("");
+  const [users, setUsers] = useState([]);
   const postCollectionRef = collection(db, "posts");
+  const usersRef = collection(db, "users");
   
   var currentPostId;
   onAuthStateChanged(auth, (currentUser) => {
@@ -82,11 +85,17 @@ function App() {
       //Appending the data to the posts state
       setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id, comments: collection(db, "posts", `${doc.id}`, "comments")})));
   }
+  const getUsersData = async () => {
+    const data = await getDocs(usersRef);
+    setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id })))
+  }
   getMessageData();
   //We should also read in the liked posts for the user!
   getPostData();
+  getUsersData();
+  
   }, [])
-
+  console.log(users);
   return (
     <Router>
       <NavbarTop auth={auth} setIsAuth={setIsAuth} isAuth={isAuth} isUserNull={isUserNull} signUserOut={signUserOut}/>
@@ -118,6 +127,14 @@ function App() {
             return (
               <Route path={messageLink.id} element={<ChatSystem data={messageLink}/>} />
             )
+          })
+        }
+        {
+          users.map((user) => {
+            
+            return (
+              <Route path={user.userId} element={<UserProfile user={user}/>} />
+            );
           })
         }
       

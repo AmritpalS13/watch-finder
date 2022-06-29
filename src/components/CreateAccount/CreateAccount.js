@@ -36,7 +36,7 @@ function CreateAccount() {
             console.log("UID : ", user.user.uid);
             //User is logged in, so we want to add them to the collection.
             addUserToCollection(user);
-            //window.location.pathname = "/viewposts";
+            window.location.pathname = "/accountinformation";
         } catch(error) {
             alert(error.message);
         }

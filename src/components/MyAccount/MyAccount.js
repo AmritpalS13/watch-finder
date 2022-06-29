@@ -69,6 +69,8 @@ const MyAccountData = ({ user }) => {
   const [updateName, setUpdateName] = useState(false);
   const [newUserName, setNewUserName] = useState("");
 
+  const [updateBio, setUpdateBio] = useState(false);
+  const [newBio, setNewBio] = useState("");
   //user wants to update their profile picture.
   const [image, setImageUpload] = useState(null);
   const [imageProfile, setImageProfile] = useState(null);
@@ -92,6 +94,8 @@ const MyAccountData = ({ user }) => {
           console.log("Picture set metadata: ", url);
         }
         setNewPicture();
+        alert("Picture changed!");
+        window.location.pathname="/accountinformation";
       })
     });
     
@@ -122,13 +126,24 @@ const MyAccountData = ({ user }) => {
     }
 
   }, []);
-  
+  const addNewBio = async () => {
+    await updateDoc(userRef, {
+      bio: newBio,
+    })
+    setUpdateBio(false);
+  }
   return (
     //To change picture, we need to upload the file, and then retrieve the DOWNLOAD URL, and then set it in the user's collection DB.
     <Container>
       <div className='profile-container'>
       <h1  className='profile-picture-header' >{user.userName}</h1>
       <img  className="profile-image"  src={user.profilePicture} />
+        <div className='bio-container'> 
+        <p>BIO</p>
+          <h6>{user.bio}</h6>
+          <button className='bio-btn' onClick={() => setUpdateBio(!updateBio)}>Update Bio</button>
+          {updateBio && (<UpdateBio setNewBio={setNewBio} addNewBio={addNewBio}/>)}
+        </div>
         <br />
         <button className="change-picture" onClick={() => uploadImage()}>Change Picture!</button>
         <input className="profile-picture-input" type='file' name="image" onChange={(event) => setImageUpload(event.target.files[0]) } />
@@ -141,6 +156,15 @@ const MyAccountData = ({ user }) => {
   )
 }
 
+const UpdateBio = ({ setNewBio, addNewBio}) => {
+  return (
+    <div>
+      <textarea type="text" placeholder='Update your BIO' onChange={(e) => setNewBio(e.target.value)}></textarea>
+      <br />
+      <button onClick={() => addNewBio()}>Update!</button>
+    </div>
+  )
+}
 //The code below is strictly for changing the username and is functioning.
 const InputUserNameForm = ({ changeName, setNewUserName, setNameReq }) => {
   const [show, setShow] = useState(true);

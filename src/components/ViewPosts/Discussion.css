@@ -53,3 +53,14 @@
     color: white;
     background-color: black;
 }
+.image-profile-btn {
+    color: white;
+    background: none;
+    border:2px solid white;
+    width:80px;
+    transition: all 0.3s 0.3s ease-in-out;
+}
+.image-profile-btn:hover {
+    background: white;
+    color: black;
+}

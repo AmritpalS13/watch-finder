@@ -22,8 +22,8 @@
 }
 
 .image {
-    width: 40rem;
-    height: 33rem;
+    width: 43rem;
+    height: 40rem;
     border-radius: 50px;
     transition: all 0.3s 0.3s ease;
 }
@@ -110,4 +110,13 @@
 }
 .add-input::placeholder {
     color: white;
+}
+
+.image-container {
+    width: 55rem;
+    height: 45rem;
+    margin-top: 50px;
+}
+.information-container {
+    margin-top: 50px;
 }

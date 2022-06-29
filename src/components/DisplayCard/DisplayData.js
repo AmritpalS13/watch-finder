@@ -13,7 +13,7 @@ import { addDoc, collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 function DisplayData({ comments, post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
     // const [show, setShow] = useState(false);
-    console.log(comments);
+    
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
     const handleClose = () => setShow(false);

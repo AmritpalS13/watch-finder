@@ -26,6 +26,7 @@ function Discussion() {
           await addDoc(discussionRef, {
             comment: newComment,
             author: user,
+            time: new Date().getTime(), // this will be used to determine which comment came first.
           });
         }
         //Let's try and get some data about the person who is commenting;
@@ -34,11 +35,12 @@ function Discussion() {
         console.log("Comment has been added!");
     }
     useEffect(() => {
+        
         const getData = async () => {
             const data = await getDocs(discussionRef);
             data.docs.map((doc) => {
                 setAddComment(doc.data());
-            })
+            });
         }
         const getUsers = async () => {
             const userData = await getDocs(userRef);
@@ -53,7 +55,11 @@ function Discussion() {
         getUsers();
         
     }, [refresh]);
-    
+    const testFunc = (com) => {
+        console.log(com.author.userId);
+        window.location.pathname= com.author.userId;
+
+    }
     return (
         <>
             <h1 className='dis-header'>Discussion</h1>
@@ -68,13 +74,14 @@ function Discussion() {
                                 <Row>
                                     <Col xs={3}>
                                     <img className='image-dis' src={com.author.profilePicture}/>
+                                    <button className='image-profile-btn' onClick={() => testFunc(com)}>Profile</button>
                                     </Col>
                                     <Col xs={9}>
                                     <div className='com-container'>
                                         <h6 className='com-header' >{com.author.userName}</h6>
                                         <p className="com-comment" >{com.comment}</p>
                                     </div>
-                                    
+                        
                                     </Col>
                                 </Row>
                             </div>

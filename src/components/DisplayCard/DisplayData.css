@@ -98,7 +98,7 @@
 }
 .display-data-card:hover {
     background: rgba(0, 0, 0, 1.0);
-    border: 10px solid black;
+    /* border: 10px solid black; */
 }
 .new-card-container {
     font-family: 'Kdam Thmor Pro', sans-serif;
