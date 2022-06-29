@@ -80,7 +80,7 @@ function App() {
     const getPostData = async () => {
       const data = await getDocs(postCollectionRef);
       //Appending the data to the posts state
-      setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id, comments: collection(db, "posts", `${doc.id}`, "comments")})));
   }
   getMessageData();
   //We should also read in the liked posts for the user!

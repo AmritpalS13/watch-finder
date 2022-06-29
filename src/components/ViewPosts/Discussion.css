@@ -1,0 +1,55 @@
+.discussion-container {
+    padding: 20px;
+    margin-left: 20px;
+}
+.dis-header {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.comment-container {
+    margin-top: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.25s 0.25s ease-in-out;
+}
+.comment-container:hover {
+    color: white;
+    background: black;
+}
+.image-dis {
+    width: 80px;
+    height: 80px;
+}
+.com-container {
+    margin-left: 20px;
+}
+.com-header {
+    
+}
+.com-comment {
+    font-size: 18px;
+}
+.dis-input {
+    border-radius: 25px;
+    margin-left: 50px;
+    outline: none;
+    transition: all 0.3s 0.3s ease-in-out;
+}
+.dis-input:focus{
+    color: white;
+    background-color: black;
+    
+}
+.dis-btn {
+    border-radius: 10px;
+    padding: 10px;
+    background: none;
+    margin-left: 20px;
+    transition: all 0.3s 0.3s ease-in-out;
+}
+.dis-btn:hover {
+    color: white;
+    background-color: black;
+}

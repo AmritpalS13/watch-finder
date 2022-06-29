@@ -63,8 +63,9 @@
 .display-card-image {
     max-height: 250px;
     min-height: 250px;
-    
+  
 }
+
 @media screen and (max-width: 450px) {
     .display-data-card {
         width: 15rem;

@@ -13,6 +13,7 @@ import { addDoc, collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 function DisplayData({ comments, post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
     // const [show, setShow] = useState(false);
+    console.log(comments);
     const [show, setShow] = useState(false);
     const [user, setUser] = useState(null);
     const handleClose = () => setShow(false);
@@ -29,7 +30,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
     const [postComments, setComments] = useState([]);
 
     const [newComment, setNewComment] = useState("");
-
+    const [refresh, setRefresh] = useState(false);
     const addNewComment = () => {
       console.log("Comment to add : ", newComment);
       console.log("Comment being added by :", auth.currentUser.email);
@@ -41,6 +42,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
       }
       //Let's try and get some data about the person who is commenting;
       addComment();
+      setRefresh(!refresh);
 
       console.log("Comment has been added!");
     }
@@ -83,7 +85,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
         if(loggedIn !== null) {
             log = true;
         } 
-    }, [])
+    }, [refresh])
     if(deletePost !== undefined) {
         del = true;
     } 
@@ -101,7 +103,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                                 <Carousel>
       {imageList.map((image) => {
         return (
-          <Carousel.Item>
+          <Carousel.Item >
             <Card.Img className="display-card-image"variant="top" src={image} />
             </Carousel.Item>
         )
@@ -135,7 +137,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
 }
 
 const Comments = ({postComments, setNewComment, addNewComment}) => {
-  console.log(postComments);
+  
   return (
     <Accordion  style={{marginTop:'20px'}}>
       <Accordion.Item className="main-comment-bar" eventKey="0">
@@ -170,6 +172,8 @@ const Comments = ({postComments, setNewComment, addNewComment}) => {
     </Accordion>
   )
 }
+
+
 const ShowMessageSystem = ({post}) => {
     const [show, setShow] = useState(true);
 

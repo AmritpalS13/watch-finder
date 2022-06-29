@@ -11,6 +11,8 @@ import TestCard from '../../TestCard';
 import ViewListing from '../ViewListing/ViewListing';
 
 import './ViewPosts.css';
+import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import Discussion from './Discussion';
 //We need to pull the data, from the database.
 function ViewPosts() {
     //Here's where we load in the data.
@@ -73,7 +75,11 @@ function ViewPosts() {
         
         
 
-          
+        <Row>
+        <Col xs={4}>
+        <Discussion />
+        </Col>
+        <Col xs={8}>
         <div className="viewlisting-bg">
             <div className="search-section" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
                 <SearchPosts setSearch={setSearch}/>
@@ -107,7 +113,10 @@ function ViewPosts() {
                 <Routes>
                     <Route path="/viewlisting" element={<ViewListing posts={posts} id={postId} />} />
                 </Routes>
+
         </div>
+        </Col>
+        </Row>
        
     )
 }

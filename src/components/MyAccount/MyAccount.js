@@ -44,11 +44,10 @@ function MyAccount({ auth }) {
     })
   }
 
-  console.log(users);
+ 
   return (
-    <Container style={{display:'flex',alignItems:'center', justifyContent:'center'}}>
+    <Container fluid style={{display:'flex',alignItems:'center', justifyContent:'center'}}>
     <div>
-
       {users.map((singleUser) => {
         if(singleUser.userId == auth.currentUser.uid) {
           return (
@@ -127,23 +126,23 @@ const MyAccountData = ({ user }) => {
   return (
     //To change picture, we need to upload the file, and then retrieve the DOWNLOAD URL, and then set it in the user's collection DB.
     <Container>
-      <div>
-        <button onClick={() => window.location.pathname="messages"}>View Messages</button>
-      <h6>Profile picture</h6>
-      <img style={{border:'2px solid', borderRadius:'50px', width:'217px', height:'210px'}} src={user.profilePicture} />
-      </div>
-        <button onClick={() => uploadImage()}>Change Picture!</button>
-        <input type='file' name="image" onChange={(event) => setImageUpload(event.target.files[0]) } />
-      <h6>username : {user.userName}</h6>
-      <button onClick={() => setNameReq(true)}>Update username</button>
+      <div className='profile-container'>
+      <h1  className='profile-picture-header' >{user.userName}</h1>
+      <img  className="profile-image"  src={user.profilePicture} />
+        <br />
+        <button className="change-picture" onClick={() => uploadImage()}>Change Picture!</button>
+        <input className="profile-picture-input" type='file' name="image" onChange={(event) => setImageUpload(event.target.files[0]) } />
+      < br/>
+      <button className="change-picture" style={{marginTop:'20px'}}onClick={() => setNameReq(true)}>Update username</button>
 
-      {nameReq && (<InputUserNameForm show={true} changeName={changeName} setNewUserName={setNewUserName}/>)}
+      {nameReq && (<InputUserNameForm show={true} changeName={changeName} setNewUserName={setNewUserName} setNameReq={setNameReq}/>)}
+      </div>
     </Container>
   )
 }
 
 //The code below is strictly for changing the username and is functioning.
-const InputUserNameForm = ({ changeName, setNewUserName }) => {
+const InputUserNameForm = ({ changeName, setNewUserName, setNameReq }) => {
   const [show, setShow] = useState(true);
   const [username, setUsername] = useState();
 
@@ -156,6 +155,7 @@ const InputUserNameForm = ({ changeName, setNewUserName }) => {
     </Button>
 
     <Modal
+      className="username-modal"
       show={show}
       backdrop="static"
       keyboard={false}
@@ -164,12 +164,13 @@ const InputUserNameForm = ({ changeName, setNewUserName }) => {
         <Modal.Title>Change Username</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Please enter a valid username, longer than 2 character to continue. A
+        Please enter a valid username, longer than 2 characters to continue. A
         username is a requirment to contiue
-        <input type="text" placeholder='Enter new Username....' onChange={(event) => setNewUserName(event.target.value)}></input>
+        <input className="username-input" type="text" placeholder='Enter new Username....' onChange={(event) => setNewUserName(event.target.value)}></input>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={() => changeName(username)}>submit</Button>
+      <button className='change-username-btn' onClick={() => setNameReq(false)}>CLOSE</button>
+        <button className='change-username-btn' onClick={() => changeName(username)}>SUBMIT</button>
       </Modal.Footer>
     </Modal>
   </>
