@@ -30,6 +30,8 @@ import Messages from './components/MyMessages/Messages';
 import TestMessage from './TestMessage';
 import ChatSystem from './ChatSystem';
 import UserProfile from './components/UserProfiles/UserProfile';
+import FriendsTest from './FriendsTest';
+import Users from './components/Users/Users';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -95,7 +97,7 @@ function App() {
   getUsersData();
   
   }, [])
-  console.log(users);
+  
   return (
     <Router>
       <NavbarTop auth={auth} setIsAuth={setIsAuth} isAuth={isAuth} isUserNull={isUserNull} signUserOut={signUserOut}/>
@@ -114,6 +116,7 @@ function App() {
         <Route path="myposts" element={<MyPosts />} />
         <Route path="messages" element={<Messages />} />
         <Route path="accountinformation" element={<MyAccount auth={auth} />} />
+        <Route path="users" element={<Users users={users}/>} />
         {/* <Route path="viewlisting" element={<ViewListing post={posts} id={currentPostId}/>} /> */}
         {
           posts.map((post) => {
@@ -139,7 +142,7 @@ function App() {
         }
       
         {/* <Route path="myaccount" element={<SavedPosts />} /> */}
-        <Route path="test" element={<TestMessage />} />
+        <Route path="test" element={<FriendsTest />} />
       </Routes>
      
     </Router>

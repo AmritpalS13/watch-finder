@@ -1,18 +1,35 @@
 import React, {useState, useEffect} from 'react';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../firebase-config';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import './UserProfile.css';
 import Dashboard from './Dashboard';
+import DisplayCard from '../DisplayCard/DisplayCard';
+import TestDisplayCard from './TestDisplayCard';
 
 function UserProfile({ user }) {
     const [message, setMessage] = useState("");
     const [currentUser, setCurrentUser] = useState(null);
     const [dashboardData, setDashboardData] = useState([]);
-
+    const [posts, setPosts] = useState([]);
     const userRef = collection(db, "users");
     const dashboardRef = collection(db, 'users', `${user.userId}`, 'dashboard');
+
+    //Right now we will figure out how we can add a friend.
+    
+    
+    const addFriend = async () => {
+        //This would be the reference to the friends collection for the current user that's logged in.
+        const friendsRef = collection(db, "users", `${currentUser.userId}`, "friends");//The following is the reference to the friends sub collection.
+        const add = async () => {
+            const addCol = await setDoc(doc(friendsRef, user.userId), {
+                friend: user,
+            })
+        }
+        add();
+        alert("Friend added!");
+    }
     const messageSent = () => {
         //we want to add a document into the message-test collection.
         const addMessageSystem = async () => {
@@ -51,17 +68,22 @@ function UserProfile({ user }) {
             })
 
         }
+        const getUsersPosts = async () => {
+            const data = await getDocs(collection(db, 'posts'));
+            setPosts(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+        }
         getUsersData();
         getCommentData();
+        getUsersPosts();
     }, [])
-   
+  
     return (
         <Container>
             <Row className='user-profile-container'>
                 <Col>
                 <img style={{width:'200px', height:'200px'}}src={user.profilePicture} />
                 <br />
-                <button>Add Friend</button>
+                <button onClick={() => addFriend()}>Add Friend</button>
                 </Col>
                 <Col xs={8}>
                 <h1>{user.userName}</h1>
@@ -71,6 +93,8 @@ function UserProfile({ user }) {
             <input className="dash-input" type="text" placeholder='Write something to the Dashboard.....' onChange={(e) => setMessage(e.target.value)}/>
             <br />
             <button className="input-btn" onClick={() => messageSent()}>Submit</button>
+            <Row>
+            <Col>
             {
                 dashboardData.map((data) => {
                     return (
@@ -78,8 +102,43 @@ function UserProfile({ user }) {
                     )
                 })
             }
+            </Col>
+            <Col>
+                <h6>{user.userName} posts</h6>
+                <DisplayUserPosts posts={posts} user={user} />
+
+
+            </Col>
+            </Row>
         </Container>
     );
+}
+
+const DisplayUserPosts = ({posts, user}) => {
+
+    return (
+        <>
+             {
+                posts.map((post) => {
+                    if(post.author.id === user.userId) {
+                        return (
+                            <DisplayCard
+                    post={post}
+                    postId={post.id}
+                    imagesUid={post.imagesUid} 
+                    model={post.model} 
+                    name={post.name} 
+                    price={post.price} 
+                    desc={post.desc} 
+                    authorEmail={post.author.email}
+                    
+                    />
+                        )
+                    }
+                })
+            }
+        </>
+    )
 }
 
 

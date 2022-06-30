@@ -89,10 +89,10 @@ function ViewListing({post}) {
                         <img className="profile-picture-listing"src={post.userData.profilePicture} />
                         <h6>{post.userData.userName}</h6>
                     </div>
-                    <Card.Header className="title" style={{color:'white'}}>{post.model} {post.name} {post.watchRef}</Card.Header>
+                    <Card.Header className="title" >{post.model} {post.name} {post.watchRef}</Card.Header>
                     <Card.Body>
-                    <Card.Title className="price" style={{color:'white'}}>$ {post.price}</Card.Title>
-                    <Card.Text className="desc"style={{color:'white'}}>
+                    <Card.Title className="price" >$ {post.price}</Card.Title>
+                    <Card.Text className="desc">
                         {post.desc}
                     </Card.Text>
                     <button>Just button</button>

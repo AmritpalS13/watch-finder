@@ -57,7 +57,7 @@
     width: 18rem;
     margin-left: 3rem;
     margin-top: 20px;
-    
+    border-radius: 20px;
     transition: all 0.3s 0.3s ease;
 }
 .display-card-image {
@@ -139,4 +139,22 @@
 }
 input:focus {
     color: white;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-right: 10px;
+    transition: all 0.2s 0.2s ease-in-out
+}
+.profile-picture:hover {
+    width: 60px;
+    height: 60px;
+}
+.watch-model-title {
+    transition: all 0.2s 0.2s ease-in-out;
+}
+.watch-model-title:hover {
+    font-size: 24px;
 }

@@ -97,7 +97,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
                             <Col>
                                 <Card  className="display-data-card" >
                                 <Card.Title style={{fontStyle:'italic', fontSize:'12px', paddingLeft:'10px'}}>
-                                    <img src={post.userData.profilePicture} style={{width:'50px', height:'50px', borderRadius:'50px', marginRight:'10px'}}/>
+                                    <img src={post.userData.profilePicture} className="profile-picture"/>
                                       {post.userData.userName}
                                     </Card.Title>
                                 <Carousel>
@@ -110,7 +110,7 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
       })}
       </Carousel>
                                     <Card.Body>
-                                    <Card.Title>{model}</Card.Title>
+                                    <Card.Title className="watch-model-title">{model}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>{name}</Card.Title>
                                     <Card.Title style={{fontStyle:'italic'}}>$ {price}</Card.Title>
                                     
@@ -215,6 +215,7 @@ const ShowMessageSystem = ({post}) => {
       if(checkIfConvoAlreadyExists()) {
 
       }
+      //The message is being sent, we can store it in the sub collection for the user that posted the ad.
       var uniqueID = v4();
       //This doc, will contain the information we need.
       await addDoc(messageRef, {
