@@ -78,37 +78,56 @@ function UserProfile({ user }) {
     }, [])
   
     return (
-        <Container>
-            <Row className='user-profile-container'>
-                <Col>
-                <img style={{width:'200px', height:'200px'}}src={user.profilePicture} />
-                <br />
-                <button onClick={() => addFriend()}>Add Friend</button>
-                </Col>
-                <Col xs={8}>
-                <h1>{user.userName}</h1>
-                <h6>{user.bio}</h6>
-                </Col>
-            </Row>
-            <input className="dash-input" type="text" placeholder='Write something to the Dashboard.....' onChange={(e) => setMessage(e.target.value)}/>
-            <br />
-            <button className="input-btn" onClick={() => messageSent()}>Submit</button>
+        // <Container>
+        //     <Row className='user-profile-container'>
+        //         <Col>
+        //         <img style={{width:'200px', height:'200px'}}src={user.profilePicture} />
+        //         <br />
+        //         <button onClick={() => addFriend()}>Add Friend</button>
+        //         </Col>
+        //         <Col xs={8}>
+        //         <h1>{user.userName}</h1>
+        //         <h6>{user.bio}</h6>
+        //         </Col>
+        //     </Row>
+        //     <input className="dash-input" type="text" placeholder='Write something to the Dashboard.....' onChange={(e) => setMessage(e.target.value)}/>
+        //     <br />
+        //     <button className="input-btn" onClick={() => messageSent()}>Submit</button>
+        //     <Row>
+        //     <Col>
+        //     {
+        //         dashboardData.map((data) => {
+        //             return (
+        //                 <Dashboard data={data} />
+        //             )
+        //         })
+        //     }
+        //     </Col>
+        //     <Col>
+        //         <h6>{user.userName} posts</h6>
+        //         <DisplayUserPosts posts={posts} user={user} />
+
+
+        //     </Col>
+        //     </Row>
+        // </Container>
+        <Container fluid>
+                                    <img style={{width:'100px', height:'100px'}} src={user.profilePicture} />
+                        <button>Add Friend</button>
+                        <h1>{user.userName}</h1>
             <Row>
-            <Col>
-            {
-                dashboardData.map((data) => {
-                    return (
-                        <Dashboard data={data} />
-                    )
-                })
-            }
-            </Col>
-            <Col>
-                <h6>{user.userName} posts</h6>
-                <DisplayUserPosts posts={posts} user={user} />
-
-
-            </Col>
+                <Col >                    
+                        <h6>{user.userName} Posts</h6>
+                        <DisplayUserPosts posts={posts} user={user} />
+                </Col>
+                <Col >
+                        <h6>Feed</h6>
+                        <DisplayUserPosts posts={posts} user={user} />
+                </Col>
+                <Col >
+                        <h6>Dash</h6>
+                        <DisplayUserPosts posts={posts} user={user} />
+                </Col>
             </Row>
         </Container>
     );

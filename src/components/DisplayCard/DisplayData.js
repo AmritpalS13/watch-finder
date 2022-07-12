@@ -5,10 +5,11 @@ import {ref, listAll, getDownloadURL} from 'firebase/storage';
 import { storage, db } from '../../firebase-config';//importing the storage for images.
 import { v4 } from 'uuid';
 import './DisplayCard.css';
-
 import './DisplayData.css';
+
+import Comments from './Comments';
 import ViewPosts from '../ViewPosts/ViewPosts';
-import { addDoc, collection, getDocs, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, doc, updateDoc, setDoc } from 'firebase/firestore';
 
 function DisplayData({ comments, post, postId, viewPost, model, name, price, desc, authorEmail, imagesUid, deletePost }) {
     //Might be usefule to associate the exact user with the post, so we can send a message to the user.
@@ -136,42 +137,42 @@ function DisplayData({ comments, post, postId, viewPost, model, name, price, des
     )
 }
 
-const Comments = ({postComments, setNewComment, addNewComment}) => {
-  
-  return (
-    <Accordion  style={{marginTop:'20px'}}>
-      <Accordion.Item className="main-comment-bar" eventKey="0">
-        <Accordion.Header>Comments</Accordion.Header>
-        <Accordion.Body>
-        {/* <ListGroup style={{}}className="list-group-flush">
-          {postComments.map((comment) => {
-            return (
+
+// const Comments = ({postComments, setNewComment, addNewComment}) => {
+//   return (
+//     <Accordion  style={{marginTop:'20px'}}>
+//       <Accordion.Item className="main-comment-bar" eventKey="0">
+//         <Accordion.Header>Comments</Accordion.Header>
+//         <Accordion.Body>
+//         {/* <ListGroup style={{}}className="list-group-flush">
+//           {postComments.map((comment) => {
+//             return (
               
               
-              <ListGroupItem className="list-card item-comment" ></ListGroupItem>
+//               <ListGroupItem className="list-card item-comment" ></ListGroupItem>
               
-            )
-          })}
-          </ListGroup> */}
-          <div>
-            {
-              postComments.map((comment) => {
-                return (
-                  <div style={{padding:'20px',border:'2px solid white'}}>
-                    <p><img  style={{width:'50px', height:'50px', borderRadius:'50px'}}src={comment.author.profilePicture} /> {comment.author.userName}</p>
-                    <h6>{comment.comment}</h6>
-                  </div>
-                )
-              })
-            }
-          </div>
-          <input className="comment-input" type="text" placeholder='comment...' onChange={(event) => setNewComment(event.target.value)}/>
-          <button onClick={() => addNewComment()}>Submit</button>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
-  )
-}
+//             )
+//           })}
+//           </ListGroup> */}
+//           <div>
+//             {
+//               postComments.map((comment) => {
+//                 return (
+//                   <div style={{padding:'20px',border:'2px solid white'}}>
+//                     <p><img  style={{width:'50px', height:'50px', borderRadius:'50px'}}src={comment.author.profilePicture} /> {comment.author.userName}</p>
+//                     <h6>{comment.comment}</h6>
+//                   </div>
+//                 )
+//               })
+//             }
+//           </div>
+//           <input className="comment-input" type="text" placeholder='comment...' onChange={(event) => setNewComment(event.target.value)}/>
+//           <button onClick={() => addNewComment()}>Submit</button>
+//         </Accordion.Body>
+//       </Accordion.Item>
+//     </Accordion>
+//   )
+// }
 
 
 const ShowMessageSystem = ({post}) => {
@@ -189,18 +190,13 @@ const ShowMessageSystem = ({post}) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
+    const [currentUser, setCurrentUser] = useState(null);//This will be the currently logged in user. We will need this as we will write to the db
     const usersRef = collection(db, "users");
 
     //get the reference to the DB,
     const messageRef = collection(db, "messaging-system");
 
     //The following will check if a conversation already exists.
-    const checkIfConvoAlreadyExists = () => {
-      
-
-      return false;
-    }
     //We need to also update the comments collection here.
     
     const sendMess = async () => {
@@ -209,12 +205,6 @@ const ShowMessageSystem = ({post}) => {
 
       //We want to push the message-system ID into the array.
       
-     
-      
-      //We will also need to check if a conversation between the sender and reciver already exists
-      if(checkIfConvoAlreadyExists()) {
-
-      }
       //The message is being sent, we can store it in the sub collection for the user that posted the ad.
       var uniqueID = v4();
       //This doc, will contain the information we need.
@@ -231,6 +221,7 @@ const ShowMessageSystem = ({post}) => {
       var tempArray = user.messages;
       tempArray.push(uniqueID);
       //Now we want to update that field in the user's DOC,
+      //We're gonna wana auto generate, so we can link it to a chat system.
       const userRef = doc(db, "users", post.author.id);
       const updateUserMessagesArray = async () => {
         await updateDoc(userRef, {
@@ -241,8 +232,26 @@ const ShowMessageSystem = ({post}) => {
       
     }
 
+    const testSendMessage = () => {
+      console.log(currentUser);
+      const messageRef = collection(db, "users", `${post.author.id}`, "message-system");
+      const createChatLink = async () => {
+        await setDoc(doc(messageRef, `${currentUser.userId}`), {
+          chat_id: v4(),
+          sender: currentUser,
+        })
+      }
+      const mesRef = collection(db, 'users', `${post.author.id}`, "message-system", `${currentUser.userId}`);
+      const addMessage = async () => {
+        await setDoc()
+      }
+      createChatLink();
+
+    }
+    //The flow within the db,
+    // Users -> message-system -> generated_id -> 
     const submitMessage = () => {
-      sendMess();
+      
       
       
     }
@@ -259,10 +268,18 @@ const ShowMessageSystem = ({post}) => {
             //We want to append their messages array which is in "users".
           }
         })
-        
+      }
+      const getCurrentUserData = async () => {
+        const data = await getDocs(usersRef);
+        data.docs.map((doc) => {
+          if(doc.id === auth.currentUser.uid) {
+            setCurrentUser(doc.data());
+          }
+        })
       }
       getUsersData();
       getConvoData();
+      getCurrentUserData();
       
     }, []);
     
@@ -290,7 +307,10 @@ const ShowMessageSystem = ({post}) => {
           <button className='listing-btn' onClick={handleClose}>
             Close
           </button>
-          <button className="listing-btn" onClick={submitMessage}>
+          {/* <button className="listing-btn" onClick={submitMessage}>
+            Submit
+          </button> */}
+          <button className='listing-btn' onClick={testSendMessage}>
             Submit
           </button>
         </Modal.Footer>

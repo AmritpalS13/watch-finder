@@ -4,9 +4,9 @@
 .listing-btn {
     color:white;
     background-color: black;
-    padding: 5px;
+    padding: 10px;
     border: 2px solid white;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-left: 10px;
     margin-top: 10px;
     transition: all 0.3s 0.3s ease;
@@ -50,17 +50,21 @@
 
 .display-data-card {
     font-family: 'Kdam Thmor Pro', sans-serif;
-    color: white;
-    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    /* color: white; */
+    /* background: rgba(0, 0, 0, 0.7); */
     /* border: 1px solid #cccccc; */
     padding-top: 10px;
-    width: 18rem;
+    border: 3px solid #bfbfbf;
+    width: 20rem;
     margin-left: 3rem;
     margin-top: 20px;
     border-radius: 20px;
     transition: all 0.3s 0.3s ease;
 }
 .display-card-image {
+    border: 2px solid #bfbfbf;
+    border-radius: 20px;
     max-height: 250px;
     min-height: 250px;
   
@@ -97,8 +101,9 @@
     }
 }
 .display-data-card:hover {
+    color: white;
     background: rgba(0, 0, 0, 1.0);
-    /* border: 10px solid black; */
+    border: 10px solid black;
 }
 .new-card-container {
     font-family: 'Kdam Thmor Pro', sans-serif;

@@ -104,11 +104,13 @@ function Header() {
                   Also I am constantly adding new things to this site and I have a lot of things that are a work in progress
                   </p>
                 </Card.Text>
+                <button className='header-btn' onClick={() => window.location.pathname="guide"}>Guide</button>
               </Card.Body>
             </Card>
           </Col>
         </Row>
       </Container>
+          
     </Container>
   )
 }

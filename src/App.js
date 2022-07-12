@@ -32,6 +32,9 @@ import ChatSystem from './ChatSystem';
 import UserProfile from './components/UserProfiles/UserProfile';
 import FriendsTest from './FriendsTest';
 import Users from './components/Users/Users';
+import TestViewListing from './components/ViewListing/TestViewListing';
+import TestCreatePost from './TestCreatePost';
+import Guide from './components/GuidePage/Guide';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -117,12 +120,16 @@ function App() {
         <Route path="messages" element={<Messages />} />
         <Route path="accountinformation" element={<MyAccount auth={auth} />} />
         <Route path="users" element={<Users users={users}/>} />
+        <Route path="guide" element={<Guide />} />
         {/* <Route path="viewlisting" element={<ViewListing post={posts} id={currentPostId}/>} /> */}
         {
           posts.map((post) => {
             return(
               <Route path={post.id} element={<ViewListing post={post}/>} />
             )
+            // return (
+            //   <Route path={post.id} element={<TestViewListing post={post} />} />
+            // );
           })
         }
         {
@@ -143,6 +150,7 @@ function App() {
       
         {/* <Route path="myaccount" element={<SavedPosts />} /> */}
         <Route path="test" element={<FriendsTest />} />
+        <Route path="testcreate" element={<TestCreatePost />} />
       </Routes>
      
     </Router>

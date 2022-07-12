@@ -17,9 +17,32 @@ function Post({ inputModel, inputName, inputRef, inputPrice, inputDesc, createPo
         <label>Reference </label>
         <input className="input-create" type="number" placeholder='$ Price'onChange={(e) => {inputPrice(e.target.value)}}/>
         <label>Price</label>
+        <input className='input-create' type="text" placeholder='Movement' />
+        <label>Movement</label>
+        <input className='input-create' type="text" placeholder='Material' />
+        <label>Material</label>
         <textarea className="description" type="text" placeholder='Description...' onChange={(e) => {inputDesc(e.target.value)}} />
         <label>Description</label>
-       
+
+        {/**
+         * Adding the other sections (TESTING)
+         */
+         }
+        <label>Condtion</label>
+        <select>
+        <option value="1">--Condition of Watch--</option>
+        <option value="2">Brand New</option>
+        <option value="2">Used: Like New</option>
+        <option value="used">Used</option>
+        </select>
+        <label>Included</label>
+        <select>
+        <option value="1">--Box/Papers--</option>
+        <option value="2">Box and Papers</option>
+        <option value="2">Box</option>
+        <option value="2">Papers</option>
+        <option value="used">None</option>
+        </select>
         {/**add image function */}
         <PostImage inputImagesUid={inputImagesUid} inputImages={inputImages}/>
         <button onClick={() => {createPost()}}type="submit" className="btn-post">Submit</button>

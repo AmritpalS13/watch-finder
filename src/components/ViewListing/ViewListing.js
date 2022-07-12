@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { storage, auth, db } from '../../firebase-config';
-import { Container, Row, Col, Carousel, Card, Accordion, Alert} from 'react-bootstrap';
+import { Container, Row, Col, Carousel, Card, Accordion, Alert, Table} from 'react-bootstrap';
 
 import { Grid, Item } from '@mui/material';
 import './ViewListing.css';
@@ -104,7 +104,47 @@ function ViewListing({post}) {
             </Container>      
             </Col>
             </Row>
-            <Comments postComments={postComments} setComment={setComment} addNewComment={addNewComment}/>
+            {/**
+             * we will add more intricate data here, for the user posting the add to post
+             * 1- model/Name
+             * 2- reference
+             * 3- movement
+             * 3- material
+             * 4- bracelet material.
+             */}
+            <Row>
+                <Col>
+                    <Table striped bordered hover >
+                        <thead>
+                            <tr>
+                                <th>Basic Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Movement</td>
+                                <td>NH35A</td>
+                            </tr>
+                            <tr>
+                                <td>Brand</td>
+                                <td>Seiko Pressage</td>
+                            </tr>
+                            <tr>
+                                <td>Reference</td>
+                                <td>SRPB</td>
+                            </tr>
+                            <tr>
+                                <td>Material</td>
+                                <td>Metal</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Col>
+                <Col>
+                    
+                </Col>
+            </Row>
+            
         </Container>
     )
 }

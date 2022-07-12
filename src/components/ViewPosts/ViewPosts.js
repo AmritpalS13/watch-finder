@@ -76,10 +76,10 @@ function ViewPosts() {
         
 
         <Row>
-        <Col xs={4}>
+        {/* <Col xs={4}>
         <Discussion />
-        </Col>
-        <Col xs={8}>
+        </Col> */}
+        <Col >
         <div className="viewlisting-bg">
             <div className="search-section" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
                 <SearchPosts setSearch={setSearch}/>
