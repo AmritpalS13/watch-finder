@@ -33,8 +33,9 @@ import UserProfile from './components/UserProfiles/UserProfile';
 import FriendsTest from './FriendsTest';
 import Users from './components/Users/Users';
 import TestViewListing from './components/ViewListing/TestViewListing';
-import TestCreatePost from './TestCreatePost';
+
 import Guide from './components/GuidePage/Guide';
+import MessageDash from './components/ChatSystem/MessageDash/MessageDash';
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -117,7 +118,10 @@ function App() {
         <Route path="viewposts" element={<ViewPosts viewPost={viewPost}/>} />
         <Route path="myaccount" element={<MyAccount auth={auth}/>} />
         <Route path="myposts" element={<MyPosts />} />
+
+        {/**The following path will reveal all the messages that the user has recived. */}
         <Route path="messages" element={<Messages />} />
+        
         <Route path="accountinformation" element={<MyAccount auth={auth} />} />
         <Route path="users" element={<Users users={users}/>} />
         <Route path="guide" element={<Guide />} />
@@ -150,7 +154,7 @@ function App() {
       
         {/* <Route path="myaccount" element={<SavedPosts />} /> */}
         <Route path="test" element={<FriendsTest />} />
-        <Route path="testcreate" element={<TestCreatePost />} />
+        <Route path="messagedash" element={<MessageDash users={users}/>} />
       </Routes>
      
     </Router>

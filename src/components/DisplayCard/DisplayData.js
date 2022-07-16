@@ -232,14 +232,19 @@ const ShowMessageSystem = ({post}) => {
       
     }
 
+    //This code will need to be moved out of this section. And into a different section
     const testSendMessage = () => {
       console.log(currentUser);
       const messageRef = collection(db, "users", `${post.author.id}`, "message-system");
+      
+      
+      
       const createChatLink = async () => {
         await setDoc(doc(messageRef, `${currentUser.userId}`), {
           chat_id: v4(),
           sender: currentUser,
         })
+ 
       }
       const mesRef = collection(db, 'users', `${post.author.id}`, "message-system", `${currentUser.userId}`);
       const addMessage = async () => {
@@ -247,6 +252,41 @@ const ShowMessageSystem = ({post}) => {
       }
       createChatLink();
 
+    }
+    const sendMessage = async () => {
+      //This would be the poster
+      const messRef = collection(db, "users", `${post.author.id}`, "message-system");
+      //This would be the sender
+      const currentRef = collection(db, "users", `${currentUser.userId}`, "message-system");
+      const send = async () => {
+        const generate_id = v4();//Generate the uniqe ID for the chat
+        const addCol = await setDoc(doc(messRef, generate_id),{
+          sender_id: currentUser.userId,
+          sender: currentUser,
+          rec: post.userData,
+          rec_id: post.userData.userId,
+          id: generate_id,//stores the ID, we will need this value later on.
+        });
+        const messageRef = collection(db, "users",`${post.author.id}`, "message-system", generate_id, "messages");
+        const addMess = await setDoc(doc(messageRef), {
+          message: message,
+          sent: currentUser,
+        })
+      }
+      //Now we want to establish the actual message,
+      
+      //const messageSentRef = collection(db, "users", `${post.author.id}`, "message-system", )
+      const rec = async () => {
+        const addCol = await setDoc(doc(currentRef), {
+          sender_id: currentUser.userId,
+          sender: currentUser,
+          rec: post.userData,
+          rec_id: post.userData.userId,
+        });
+      }
+      send();
+      rec();
+      alert("message sent");
     }
     //The flow within the db,
     // Users -> message-system -> generated_id -> 
@@ -310,7 +350,7 @@ const ShowMessageSystem = ({post}) => {
           {/* <button className="listing-btn" onClick={submitMessage}>
             Submit
           </button> */}
-          <button className='listing-btn' onClick={testSendMessage}>
+          <button className='listing-btn' onClick={sendMessage}>
             Submit
           </button>
         </Modal.Footer>

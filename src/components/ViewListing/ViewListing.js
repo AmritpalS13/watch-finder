@@ -95,7 +95,7 @@ function ViewListing({post}) {
                     <Card.Text className="desc">
                         {post.desc}
                     </Card.Text>
-                    <button>Just button</button>
+                    <button>MESSAGE</button>
                     
                     </Card.Body>
                    
