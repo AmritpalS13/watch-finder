@@ -1,4 +1,4 @@
-import { collection } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react'
 import { db } from '../../firebase-config';
 
@@ -12,9 +12,18 @@ import { db } from '../../firebase-config';
 function MessageCard({ user }) {
 
     const [messages, setMessages] = useState(null);    
+    
+    const message_system_ref = collection(db, "users", `${user.id}`, "message-system");
+
     useEffect(() => {
         //We need to load in the message-system collection and it's documents.
-        const message_system_ref = collection(db, "users", `${user.id}`, "message-system");//This is the reference to the collection of potential messages.
+        const messageData = async () => {
+            const data = await getDocs(message_system_ref);
+            data.docs.map((data) => {
+                console.log(data);
+            })
+        }
+        messageData();
     }, [])
     return (
         <>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Container } from 'react-bootstrap'
 import { auth } from '../../../firebase-config';
+import MessageCard from '../MessageCard';
 
 
 /**
@@ -18,12 +19,14 @@ function MessageDash({ users }) {
                 users.map((user) => {
                     if(user.id === auth.currentUser.uid) {
                         return (
-                            <h1>{auth.currentUser.uid}</h1>
+                            
                             /**
                              * 1 - Logged in user is found, we can now pass this data off to the message-system-card 
                              *     which will display all the messages, so the front-end portion.
                              */
-
+                            <>
+                                <MessageCard user={user} />
+                            </>
                         )
                     }
                 })
