@@ -112,12 +112,13 @@ function ViewListing({post}) {
              * 3- material
              * 4- bracelet material.
              */}
+             <div className='table-info'>
             <Row>
                 <Col>
                     <Table striped bordered hover >
                         <thead>
                             <tr>
-                                <th>Basic Info</th>
+                                <th>Technical Info</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -144,6 +145,7 @@ function ViewListing({post}) {
                     
                 </Col>
             </Row>
+            </div>
             
         </Container>
     )

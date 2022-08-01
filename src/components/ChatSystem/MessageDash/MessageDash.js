@@ -12,7 +12,6 @@ import MessageCard from '../MessageCard';
  *     specific message-room, which will have the path of the id.
  */
 function MessageDash({ users }) {
-    console.log(users);
     return (
         <Container>
             {

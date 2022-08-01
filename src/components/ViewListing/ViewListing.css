@@ -25,7 +25,7 @@
 }
 
 .image {
-    width: 33rem;
+    width: 40rem;
     height: 38rem;
     border-radius: 50px;
     transition: all 0.3s 0.3s ease;
@@ -127,10 +127,15 @@
 }
 
 .image-container {
+    
     width: 55rem;
     height: 45rem;
     margin-top: 50px;
 }
 .information-container {
     margin-top: 50px;
+    
+}
+.table-info {
+    margin-bottom: 50px;
 }
